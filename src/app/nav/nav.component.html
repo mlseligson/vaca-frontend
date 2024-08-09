@@ -1,0 +1,10 @@
+<mat-toolbar>
+  <button (click)="onToggleClick.emit()" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{title}}</span>
+  <div class="spacer"></div>
+
+  <ng-content></ng-content>
+
+</mat-toolbar>
