@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$vaca-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$orange-palette
+  ),
+  typography: (
+    plain-family: 'Roboto',
+    brand-family: 'Tahoma',
+    bold-weight: 900
+  ),
+  density: (
+    scale: -1
+  )
+));
+
+@include mat.color-variants-backwards-compatibility($vaca-theme);
+
+html {
+  @include mat.core-theme($vaca-theme);
+  @include mat.all-component-themes($vaca-theme);
+
+  body {
+    margin: 0px;
+    height: 100vh;
+  }
+}
