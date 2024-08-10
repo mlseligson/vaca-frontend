@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './activities.component.html',
-  styleUrl: './activities.component.sass'
+  styleUrl: './activities.component.scss'
 })
 export class ActivitiesComponent {
 
