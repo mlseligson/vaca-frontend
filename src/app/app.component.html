@@ -1,24 +1,33 @@
 <app-nav title="VACA" (onToggleClick)="sidenav.toggle();">
-  <button mat-stroked-button [matMenuTriggerFor]="login">Login</button>
-  <mat-menu #login="matMenu">
+  <div *ngIf="auth.loggedIn$ | async; then loggedIn; else loggedOut"></div>
+  <ng-template #loggedIn>
+    <button mat-stroked-button [matMenuTriggerFor]="navMenu">{{auth.currentUsername$ | async}}</button>
+    <mat-menu #navMenu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item (click)="auth.logout()">Log Out</button>
+    </mat-menu>
+  </ng-template>
+  <ng-template #loggedOut>
+      <button mat-stroked-button [matMenuTriggerFor]="login">Login</button>
+      <mat-menu #login="matMenu">
+        <form class="login-form" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" (submit)="attemptLogin()">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput type="text" name="username" [(ngModel)]="credentials.username" />
+          </mat-form-field>
 
-    <form class="login-form" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" (submit)="attemptLogin()">
-      <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput type="text" name="username" [(ngModel)]="credentials.username" />
-      </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" [(ngModel)]="credentials.password" />
+          </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" name="password" [(ngModel)]="credentials.password" />
-      </mat-form-field>
+          <button mat-flat-button
+            [class.button-spinner]="loginProgress"
+            [disabled]="loginProgress"><span>Log In</span></button>
+        </form>
+      </mat-menu>
+  </ng-template>
 
-      <button mat-flat-button
-        [class.button-spinner]="loginProgress"
-        [disabled]="loginProgress"><span>Log In</span></button>
-    </form>
-
-  </mat-menu>
 </app-nav>
 
 

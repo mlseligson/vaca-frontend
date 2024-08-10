@@ -33,7 +33,7 @@ import { AuthService } from './services/auth.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(private auth: AuthService) {
+  constructor(public auth: AuthService) {
     
   }
   
@@ -54,9 +54,13 @@ export class AppComponent {
 
   attemptLogin() {
     this.loginProgress = true;
-    this.auth.login(this.credentials).subscribe(res => {
+    this.auth.login(this.credentials).subscribe(payload => {
       this.loginProgress = false;
       this.trigger.toggleMenu();
+      console.log(payload);
+    }, error => {
+      this.loginProgress = false;
+      console.log(error);
     });
   }
 
