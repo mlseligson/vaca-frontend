@@ -1,1 +1,15 @@
-<p>activities works!</p>
+<div class="activities-container">
+  <mat-card appearance="outlined">
+    <mat-card-content><mat-card-title>Ideas for inspiration!</mat-card-title></mat-card-content>
+  </mat-card>
+
+  <mat-selection-list>
+    @for (category of activityList; track category.category) {
+      <div mat-subheader>{{category.category}}</div>
+      @for (activity of category.activities; track activity) {
+        <mat-list-option>{{activity}}</mat-list-option>
+      }
+      <mat-divider></mat-divider>
+    }
+  </mat-selection-list>
+</div>
