@@ -1,0 +1,124 @@
+{
+  "vacation_activities": [
+    {
+      "category": "Outdoor Adventures",
+      "activities": [
+        "Hiking in the mountains",
+        "Zip-lining through a forest",
+        "Camping in a national park",
+        "Rock climbing",
+        "Kayaking on a river or lake",
+        "Surfing at the beach",
+        "Biking through scenic trails",
+        "Snorkeling in a coral reef",
+        "Skiing or snowboarding",
+        "Hot air balloon ride"
+      ]
+    },
+    {
+      "category": "Cultural Experiences",
+      "activities": [
+        "Visiting museums",
+        "Exploring ancient ruins",
+        "Taking a cooking class",
+        "Attending a local festival",
+        "Touring historical landmarks",
+        "Visiting art galleries",
+        "Learning a traditional dance",
+        "Trying local cuisine",
+        "Exploring local markets",
+        "Visiting religious temples or churches"
+      ]
+    },
+    {
+      "category": "Relaxation",
+      "activities": [
+        "Sunbathing on the beach",
+        "Getting a spa treatment",
+        "Taking a scenic boat cruise",
+        "Enjoying a picnic in the park",
+        "Reading a book by the pool",
+        "Practicing yoga by the sea",
+        "Watching the sunset",
+        "Staying in a luxury resort",
+        "Taking a leisurely walk in nature",
+        "Fishing by a calm lake"
+      ]
+    },
+    {
+      "category": "Family-Friendly Activities",
+      "activities": [
+        "Visiting a theme park",
+        "Going to a zoo or aquarium",
+        "Building sandcastles on the beach",
+        "Taking a family bike ride",
+        "Exploring a children's museum",
+        "Having a bonfire and roasting marshmallows",
+        "Playing mini-golf",
+        "Going on a treasure hunt",
+        "Visiting a water park",
+        "Attending a family-friendly show or performance"
+      ]
+    },
+    {
+      "category": "Adventure Sports",
+      "activities": [
+        "Skydiving",
+        "Bungee jumping",
+        "Scuba diving",
+        "Paragliding",
+        "White-water rafting",
+        "Windsurfing",
+        "Cave diving",
+        "Mountain biking",
+        "Hang gliding",
+        "Base jumping"
+      ]
+    },
+    {
+      "category": "City Exploration",
+      "activities": [
+        "Taking a city tour",
+        "Exploring local neighborhoods",
+        "Visiting famous landmarks",
+        "Shopping in local boutiques",
+        "Trying street food",
+        "Attending a live concert",
+        "Visiting rooftop bars",
+        "Taking a night-time city cruise",
+        "Exploring street art",
+        "Visiting botanical gardens"
+      ]
+    },
+    {
+      "category": "Food & Drink",
+      "activities": [
+        "Wine tasting at a vineyard",
+        "Taking a food tour",
+        "Dining at a Michelin-starred restaurant",
+        "Visiting a local brewery",
+        "Trying a local food market",
+        "Attending a cooking class",
+        "Going on a coffee tasting tour",
+        "Visiting a chocolate factory",
+        "Experiencing a traditional tea ceremony",
+        "Attending a street food festival"
+      ]
+    },
+    {
+      "category": "Unique Experiences",
+      "activities": [
+        "Riding in a helicopter",
+        "Visiting an ice hotel",
+        "Staying in an underwater hotel",
+        "Taking a polar bear plunge",
+        "Sleeping in a treehouse",
+        "Going on a safari",
+        "Riding a camel in the desert",
+        "Seeing the Northern Lights",
+        "Visiting a ghost town",
+        "Hot springs bathing"
+      ]
+    }
+  ]
+}
