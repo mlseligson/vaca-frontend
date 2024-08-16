@@ -1,1 +1,19 @@
-<p>trips works!</p>
+<div class="trips-card-list">
+  @for (trip of trips; track trip.id) {
+    <mat-card appearance="raised" [routerLink]="['/trip', trip.id]">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>{{trip.name}}</mat-card-title>
+          <mat-card-subtitle>{{trip.destination}} &middot; ${{trip.cost}}</mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-footer>
+        <mat-card-actions>
+          <button mat-icon-button>
+            <mat-icon fontSet="material-symbols-outlined">edit</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card-footer>
+    </mat-card>
+  }
+</div>
