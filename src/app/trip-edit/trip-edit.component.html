@@ -1,0 +1,48 @@
+<div class="trip-edit-container">
+  <form [formGroup]="tripForm" (ngSubmit)="attemptSave()">
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input matInput type="text" formControlName="id" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Destination</mat-label>
+      <input matInput type="text" formControlName="destination" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Cost</mat-label>
+      <input matInput type="text" formControlName="cost" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>User ID</mat-label>
+      <input matInput type="text" formControlName="user_id" /> 
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Image URL</mat-label>
+      <input matInput type="text" formControlName="image_url" />
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Start</mat-label>
+      <input matInput type="datetime-local" formControlName="start_time" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>End</mat-label>
+      <input matInput type="datetime-local" formControlName="end_time" />
+    </mat-form-field>
+  </form>
+
+  <mat-card>
+    activities and accommodations here
+  </mat-card>
+
+</div>

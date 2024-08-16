@@ -1,0 +1,22 @@
+form mat-expansion-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-edit-container {
+  display: flex;
+  flex-direction: row;
+  gap: 4vw;
+
+  form {
+    flex-basis: min-content;
+  }
+
+  mat-card {
+    flex-grow: 1;
+  }
+}
+
+mat-accordion {
+  display: block;
+}
