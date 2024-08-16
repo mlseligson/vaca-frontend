@@ -4,12 +4,17 @@
   </mat-card>
 
   <mat-selection-list>
-    @for (category of activityList; track category.category) {
-      <div mat-subheader>{{category.category}}</div>
-      @for (activity of category.activities; track activity) {
-        <mat-list-option>{{activity}}</mat-list-option>
+    <mat-accordion>
+      @for (category of activityList; track category.category) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>{{category.category}}</mat-expansion-panel-header>
+          
+          @for (activity of category.activities; track activity) {
+            <mat-list-option>{{activity}}</mat-list-option>
+          }
+        </mat-expansion-panel>
       }
-      <mat-divider></mat-divider>
-    }
+    </mat-accordion>
   </mat-selection-list>
+
 </div>
