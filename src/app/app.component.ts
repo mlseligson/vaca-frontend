@@ -41,9 +41,9 @@ export class AppComponent {
   
   title = 'vaca';
   links = [
-    { text: 'Trips', link: 'trips', icon: 'lightbulb' },
+    { text: 'Trips', link: 'trips', icon: 'your_trips' },
     { text: 'Activities', link: 'activities', icon: 'hiking'},
-    { text: 'Flights', link: 'flights', icon: 'flights_and_hotels'}
+    { text: 'Accommodations', link: 'accommodations', icon: 'flights_and_hotels'}
   ];
   loginProgress = false;
 
