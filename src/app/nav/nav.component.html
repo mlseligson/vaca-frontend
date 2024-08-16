@@ -1,8 +1,10 @@
 <mat-toolbar>
   <button (click)="onToggleClick.emit()" mat-icon-button>
-    <mat-icon>menu</mat-icon>
+    <mat-icon fontSet="material-symbols-outlined">menu</mat-icon>
   </button>
-  <span>{{title}}</span>
+  <a href="/"><img class="logo" src="vaca-logo.png" /></a>
+  
+  <!-- <span>{{title}}</span> -->
   <div class="spacer"></div>
 
   <ng-content></ng-content>
