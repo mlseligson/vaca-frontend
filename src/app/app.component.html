@@ -36,7 +36,7 @@
   <mat-sidenav #sidenav mode="push"  color="primary">
     <mat-nav-list>
       <mat-list-item *ngFor="let link of links" [routerLink]="link.link">
-        <mat-icon matListItemIcon>{{link.icon}}</mat-icon>
+        <mat-icon matListItemIcon fontSet="material-symbols-outlined">{{link.icon}}</mat-icon>
         <span>{{link.text}}</span>
       </mat-list-item>
     </mat-nav-list>
