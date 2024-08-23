@@ -3,22 +3,36 @@ import { Component, Input, numberAttribute, OnInit } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Trip } from '../services/trip.service';
-import { MatCommonModule } from '@angular/material/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Trip, TripService } from '../services/trip.service';
+import { MatCommonModule, provideNativeDateAdapter } from '@angular/material/core';
+import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { JsonPipe } from '@angular/common';
 
-const tripApiUrl = '/api/trip';
+const tripApiUrl = '/api/trips';
 
 @Component({
   selector: 'app-trip-edit',
   standalone: true,
-  imports: [MatCommonModule, MatExpansionModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatCardModule],
+  imports: [
+    MatCommonModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    JsonPipe
+  ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './trip-edit.component.html',
   styleUrl: './trip-edit.component.scss'
 })
 export class TripEditComponent implements OnInit {
-  @Input({transform: numberAttribute}) tripId = 0;
+  @Input({alias: 'id', transform: numberAttribute}) tripId!: number;
 
   trip: Trip = {
     id: 0,
@@ -31,33 +45,38 @@ export class TripEditComponent implements OnInit {
     end_time: ''
   };
 
-  tripForm: FormGroup;
+  tripForm!: FormGroup;
 
   constructor(
-    private http: HttpClient
-  ) {
-    this.tripForm = new FormGroup({
-      id: new FormControl(0),
-      name: new FormControl(''),
-      destination: new FormControl(''),
-      cost: new FormControl(0),
-      user_id: new FormControl(0),
-      image_url: new FormControl(''),
-      start_time: new FormControl(''),
-      end_time: new FormControl('')
-    })
-  }
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private tripService: TripService
+  ) {}
 
   ngOnInit(): void {
-    this.http.get<Trip>(`${tripApiUrl}/${this.tripId}`).subscribe({
+    this.tripForm = this.formBuilder.group({
+      id: [{value: null, disabled: false}],
+      name: ['', Validators.required],
+      destination: ['', Validators.required],
+      cost: [null],
+      user_id: [{value: null, disabled: false}],
+      image_url: [''],
+      start_time: [''],
+      end_time: ['']
+    });
+
+    this.tripService.getTrip(this.tripId).subscribe({
       next: (trip: Trip) => {
-        this.trip = trip;
+        this.tripForm.setValue(trip);
       }
-    })
+    });
   }
 
   attemptSave() {
-
+    this.tripService.updateTrip(this.tripId, this.tripForm.value).subscribe({
+      next: (trip: Trip) => {
+        console.log(this.tripForm.value);
+      }
+    });
   }
-
 }
