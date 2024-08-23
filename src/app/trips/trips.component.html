@@ -1,6 +1,6 @@
 <div class="trips-card-list">
   @for (trip of trips; track trip.id) {
-    <mat-card appearance="raised" [routerLink]="['/trip', trip.id]">
+    <mat-card appearance="outlined" [routerLink]="['/trip', trip.id]">
       <mat-card-header>
         <mat-card-title-group>
           <mat-card-title>{{trip.name}}</mat-card-title>
