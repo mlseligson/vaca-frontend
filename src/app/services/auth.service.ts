@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, distinctUntilChanged, from, map, throwError } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, map, throwError } from 'rxjs';
 
 interface BasicCredentials {
   username: string;
