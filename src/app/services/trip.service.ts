@@ -29,4 +29,8 @@ export class TripService {
   getTrip(id: number): Observable<Trip> {
     return this.http.get<Trip>(`${tripApiUrl}/${id}`);
   }
+
+  updateTrip(id: number, trip: Partial<Trip>): Observable<Trip> {
+    return this.http.patch<Trip>(`${tripApiUrl}/${id}`, trip);
+  }
 }
