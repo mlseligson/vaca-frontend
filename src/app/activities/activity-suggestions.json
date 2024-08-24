@@ -2,6 +2,7 @@
   "vacation_activities": [
     {
       "category": "Outdoor Adventures",
+      "icon": "nature_people",
       "activities": [
         "Hiking in the mountains",
         "Zip-lining through a forest",
@@ -17,6 +18,7 @@
     },
     {
       "category": "Cultural Experiences",
+      "icon": "diversity_2",
       "activities": [
         "Visiting museums",
         "Exploring ancient ruins",
@@ -32,6 +34,7 @@
     },
     {
       "category": "Relaxation",
+      "icon": "spa",
       "activities": [
         "Sunbathing on the beach",
         "Getting a spa treatment",
@@ -47,6 +50,7 @@
     },
     {
       "category": "Family-Friendly Activities",
+      "icon": "family_star",
       "activities": [
         "Visiting a theme park",
         "Going to a zoo or aquarium",
@@ -62,6 +66,7 @@
     },
     {
       "category": "Adventure Sports",
+      "icon": "sailing",
       "activities": [
         "Skydiving",
         "Bungee jumping",
@@ -72,11 +77,13 @@
         "Cave diving",
         "Mountain biking",
         "Hang gliding",
-        "Base jumping"
+        "Base jumping",
+        "Sailin'"
       ]
     },
     {
       "category": "City Exploration",
+      "icon": "location_city",
       "activities": [
         "Taking a city tour",
         "Exploring local neighborhoods",
@@ -92,6 +99,7 @@
     },
     {
       "category": "Food & Drink",
+      "icon": "brunch_dining",
       "activities": [
         "Wine tasting at a vineyard",
         "Taking a food tour",
@@ -107,6 +115,7 @@
     },
     {
       "category": "Unique Experiences",
+      "icon": "helicopter",
       "activities": [
         "Riding in a helicopter",
         "Visiting an ice hotel",

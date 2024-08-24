@@ -30,7 +30,10 @@
     <mat-accordion>
       @for (category of activityList; track category.category) {
         <mat-expansion-panel>
-          <mat-expansion-panel-header>{{category.category}}</mat-expansion-panel-header>
+          <mat-expansion-panel-header>
+            <mat-icon fontSet="material-symbols-outlined">{{category.icon}}</mat-icon>
+            {{category.category}}
+          </mat-expansion-panel-header>
           
           @for (activity of category.activities; track activity) {
             <mat-list-option>{{activity}}</mat-list-option>
