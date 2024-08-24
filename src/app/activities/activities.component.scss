@@ -1,5 +1,28 @@
 .activities-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  width: 50vw;
+  margin: auto;
+
+  mat-card {
+    width: 100%;
+
+    mat-card-title {
+      display: flex;
+      align-items: baseline;
+
+      .spacer {
+        flex-grow: 1;
+      }
+
+      button {
+        justify-self: flex-end;
+      }
+    }
+  }
+
+  mat-expansion-panel mat-icon {
+    margin-right: 15px;
+  }
 }

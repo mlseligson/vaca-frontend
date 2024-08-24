@@ -1,9 +1,32 @@
 <div class="activities-container">
-  <mat-card appearance="outlined">
-    <mat-card-content><mat-card-title>Ideas for inspiration!</mat-card-title></mat-card-content>
+  <mat-card appearance="raised">
+    <mat-card-content><mat-card-title>
+      @switch (!activities.selectedOptions.isEmpty()) {
+        @case (true) {
+          <mat-form-field subscriptSizing="dynamic">
+            <mat-label>Add To...</mat-label>
+            <input matInput type="text" [formControl]="addTo" [matAutocomplete]="tripAuto" />
+            <mat-autocomplete #tripAuto="matAutocomplete">
+              @for (trip of tripList; track trip.id) {
+                <mat-option [value]="trip.name">{{trip.name}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <div class="spacer"></div>
+
+          <button mat-icon-button><mat-icon>add</mat-icon></button>
+        }
+
+        @default {
+          Select what you want to do...
+        }
+      }
+      
+    </mat-card-title></mat-card-content>
   </mat-card>
 
-  <mat-selection-list>
+  <mat-selection-list #activities>
     <mat-accordion>
       @for (category of activityList; track category.category) {
         <mat-expansion-panel>
