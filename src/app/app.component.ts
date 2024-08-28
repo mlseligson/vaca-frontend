@@ -11,6 +11,7 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from './services/auth.service';
+import { LoadingProgressBarComponent } from "./loading-progress-bar/loading-progress-bar.component";
 
 @Component({
   selector: 'app-root',
@@ -27,13 +28,16 @@ import { AuthService } from './services/auth.service';
     MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
-  ],
+    FormsModule,
+    LoadingProgressBarComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(public auth: AuthService) {
+  constructor(
+    public auth: AuthService
+  ) {
     
   }
   
