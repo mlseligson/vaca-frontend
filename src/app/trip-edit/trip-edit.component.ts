@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { JsonPipe } from '@angular/common';
+import { ActivatedRoute, Data } from '@angular/router';
 
 const tripApiUrl = '/api/trips';
 
@@ -48,7 +49,7 @@ export class TripEditComponent implements OnInit {
   tripForm!: FormGroup;
 
   constructor(
-    private http: HttpClient,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private tripService: TripService
   ) {}
@@ -65,11 +66,11 @@ export class TripEditComponent implements OnInit {
       end_time: ['']
     });
 
-    this.tripService.getTrip(this.tripId).subscribe({
-      next: (trip: Trip) => {
-        this.tripForm.setValue(trip);
+    this.route.data.subscribe({
+      next: (data: Data) => {
+        this.tripForm.setValue(data['trip']);
       }
-    });
+    })
   }
 
   attemptSave() {
