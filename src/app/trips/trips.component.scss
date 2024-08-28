@@ -3,4 +3,21 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 15px;
+
+  mat-card {
+    cursor: pointer;
+  }
+
+  mat-card:last-child {
+    width: 100px;
+
+    mat-icon {
+      font-size: 50px;
+      display: flex;
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
