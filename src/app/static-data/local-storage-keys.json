@@ -1,0 +1,6 @@
+{
+  "storageKeys": {
+    "token": "vaca-jwt",
+    "user": "vaca-user" 
+  }
+}

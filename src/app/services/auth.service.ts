@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, throwError } from 'rxjs';
+import { storageKeys } from '../static-data/local-storage-keys.json';
 
 interface BasicCredentials {
   username: string;
@@ -56,18 +57,16 @@ export class AuthService {
     );    
   }
 
-
-
   login(credentials: BasicCredentials): Observable<JWTResponse | Error> {
     return this.http.post<JWTResponse | Error>(loginApiUrl, credentials).pipe(
         map(r => {
           if (isError(r))
             throw throwError(() => r);
 
-          localStorage.setItem(tokenKey, r.token);
-
           const payload = decodeJWT(r.token);
-          this.currentUser.next(payload);    
+          this.currentUser.next(payload);  
+
+          localStorage.setItem(storageKeys["token"], r.token);
 
           return r;
         })
@@ -75,12 +74,12 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem(tokenKey);
+    localStorage.removeItem(storageKeys["token"]);
     this.currentUser.next(null);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(tokenKey)
+    return localStorage.getItem(storageKeys["token"])
   }
 
   verifyExpiry(expiry: number) {
