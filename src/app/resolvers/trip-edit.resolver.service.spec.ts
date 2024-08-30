@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TripEditResolverService } from './trip-edit-resolver.service';
+import { TripEditResolverService } from './trip-edit.resolver.service';
 
 describe('TripEditResolverService', () => {
   let service: TripEditResolverService;
