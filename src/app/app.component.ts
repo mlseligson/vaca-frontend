@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from './services/auth.service';
 import { LoadingProgressBarComponent } from "./loading-progress-bar/loading-progress-bar.component";
+import { NavigationService } from './services/navigation.service';
 
 @Component({
   selector: 'app-root',
@@ -35,15 +36,9 @@ import { LoadingProgressBarComponent } from "./loading-progress-bar/loading-prog
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(
-    public auth: AuthService
-  ) {
-    
-  }
-  
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   
-  title = 'vaca';
+  title = '';
   links = [
     { text: 'Trips', link: 'trips', icon: 'your_trips' },
     { text: 'Activities', link: 'activities', icon: 'hiking'},
@@ -55,6 +50,15 @@ export class AppComponent {
     username: '',
     password: ''
   };
+
+  constructor(
+    public auth: AuthService,
+    private nav: NavigationService
+  ) {
+    nav.title$.subscribe({
+      next: (title) => this.title = title
+    })
+  }
 
   attemptLogin() {
     this.loginProgress = true;

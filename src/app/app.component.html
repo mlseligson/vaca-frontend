@@ -1,4 +1,4 @@
-<app-nav title="VACA" (onToggleClick)="sidenav.toggle();">
+<app-nav [title]="title" (onToggleClick)="sidenav.toggle();">
   <div *ngIf="auth.loggedIn$ | async; then loggedIn; else loggedOut"></div>
   <ng-template #loggedIn>
     <button mat-stroked-button [matMenuTriggerFor]="navMenu">{{auth.currentUsername$ | async}}</button>
