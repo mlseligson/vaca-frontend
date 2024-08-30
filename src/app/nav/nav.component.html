@@ -2,9 +2,11 @@
   <button (click)="onToggleClick.emit()" mat-icon-button>
     <mat-icon fontSet="material-symbols-outlined">menu</mat-icon>
   </button>
+
   <a href="/"><img class="logo" src="vaca-logo.png" /></a>
+
+  <span>{{title}}</span>
   
-  <!-- <span>{{title}}</span> -->
   <div class="spacer"></div>
 
   <ng-content></ng-content>

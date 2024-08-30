@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Observable, tap } from 'rxjs';
-import { LoadingService } from '../services/loading.service';
+import { NavigationService } from '../services/navigation.service';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -17,8 +17,8 @@ export class LoadingProgressBarComponent implements OnInit {
 
   @Input() detectRouteTransitions = false;
 
-  constructor (
-    private loadingService: LoadingService, 
+  constructor(
+    private loadingService: NavigationService,
     private router: Router
   ) {
     this.loading$ = this.loadingService.loading$;
