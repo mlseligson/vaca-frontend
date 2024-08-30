@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
-import { vacation_activities } from './activity-suggestions.json';
+import { vacation_activities as activityList } from '../static-data/activity-suggestions.json';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,15 +31,15 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './activities.component.scss'
 })
 export class ActivitiesComponent implements OnInit {
-  activityList = vacation_activities;
+  activityList: Array<any>;
   tripList!: Trip[];
-
   addTo: FormControl;
 
   constructor(
     private tripService: TripService
   ) {
     this.addTo = new FormControl('');
+    this.activityList = activityList;
   }
 
   ngOnInit(): void {
