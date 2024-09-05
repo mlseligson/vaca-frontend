@@ -48,4 +48,10 @@ export class TripService {
       this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, trip):
       this.http.post<Trip>(`${tripApiUrl}/user/${trip.user_id}`, trip);
   }
+
+  deleteTrip(tripId: number): Observable<boolean> {
+    return this.http.delete(`${tripApiUrl}/${tripId}`, {observe: 'response'}).pipe(
+      map(r => r.status == 204)
+    )
+  }
 }
