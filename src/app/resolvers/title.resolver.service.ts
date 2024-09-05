@@ -26,11 +26,11 @@ export class TitleResolverService implements Resolve<string> {
         );
 
       case "_TripEditComponent":
-        const last = this.router.url.split('/').pop();
-        console.log(last);
-        const o = (last == 'new') ? of('New trip') : of(route.parent?.data['trip']['name']);
+        const titleObservable = (route.paramMap.get('id') == 'new') ?
+          of('New trip') :
+          of(route.parent?.data['trip']['name']);
 
-        return o.pipe(
+        return titleObservable.pipe(
           tap(title => this.nav.setTitle(title))
         );
 

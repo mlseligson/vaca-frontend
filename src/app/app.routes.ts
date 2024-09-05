@@ -16,17 +16,12 @@ export const routes: Routes = [{
     title: TitleResolverService
   }]
 }, {
-  path: 'trip/new',
-  component: TripEditComponent,
-  data: { new: true },
-  title: TitleResolverService
-}, {
   path: 'trip/:id',
   resolve: { trip: TripEditResolverService },
   children: [{
     path: '',
     component: TripEditComponent,
-    title: TitleResolverService   
+    title: TitleResolverService
   }]
 }, {
   path: 'activities',
