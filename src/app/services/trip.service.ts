@@ -43,7 +43,9 @@ export class TripService {
     }
   }
 
-  updateTrip(id: number, trip: Partial<Trip>): Observable<Trip> {
-    return this.http.patch<Trip>(`${tripApiUrl}/${id}`, trip);
+  saveTrip(trip: Partial<Trip>): Observable<Trip> {
+    return (trip.id) ?
+      this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, trip):
+      this.http.post<Trip>(`${tripApiUrl}/user/${trip.user_id}`, trip);
   }
 }

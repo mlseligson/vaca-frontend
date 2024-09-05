@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { JsonPipe } from '@angular/common';
-import { ActivatedRoute, Data } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 
 const tripApiUrl = '/api/trips';
 
@@ -49,6 +49,7 @@ export class TripEditComponent implements OnInit {
   tripForm!: FormGroup;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private tripService: TripService
@@ -56,11 +57,11 @@ export class TripEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.tripForm = this.formBuilder.group({
-      id: [{value: null, disabled: false}],
+      id: [null],
       name: ['', Validators.required],
       destination: ['', Validators.required],
       cost: [null],
-      user_id: [{value: null, disabled: false}],
+      user_id: [null],
       image_url: [''],
       start_time: [''],
       end_time: ['']
@@ -68,16 +69,19 @@ export class TripEditComponent implements OnInit {
 
     this.route.data.subscribe({
       next: (data: Data) => {
-        this.tripForm.setValue(data['trip']);
+        this.tripForm.patchValue(data['trip']);
       }
     })
   }
 
   attemptSave() {
-    this.tripService.updateTrip(this.tripId, this.tripForm.value).subscribe({
+    this.tripService.saveTrip(this.tripForm.value).subscribe({
       next: (trip: Trip) => {
-        console.log(this.tripForm.value);
+        if (!this.tripForm.value.id)
+          this.router.navigate(['trip', trip.id]);
+        else
+          this.tripForm.patchValue(trip);
       }
-    });
+    });    
   }
 }
