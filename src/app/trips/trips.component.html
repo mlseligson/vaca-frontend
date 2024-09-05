@@ -1,6 +1,6 @@
 <div class="trips-card-list">
   @for (trip of trips; track trip.id) {
-    <mat-card matRipple appearance="raised" [routerLink]="['/trip', trip.id]">
+    <mat-card  appearance="raised">
       <mat-card-header>
         <mat-card-title-group>
           <mat-card-title>{{trip.name}}</mat-card-title>
@@ -9,8 +9,11 @@
       </mat-card-header>
       <mat-card-footer>
         <mat-card-actions>
-          <button mat-icon-button>
+          <button mat-icon-button [routerLink]="['/trip', trip.id]">
             <mat-icon fontSet="material-symbols-outlined">edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteTrip(trip)">
+            <mat-icon fontSet="material-symbols-outlined">delete</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card-footer>

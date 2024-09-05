@@ -3,8 +3,11 @@ import { TripService, Trip } from '../services/trip.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute, Data, RouterLink } from '@angular/router';
+import { ActivatedRoute, Data, Router, RouterLink } from '@angular/router';
 import { MatRippleModule } from '@angular/material/core';
+import { DialogService } from '../services/dialog.service';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-trips',
@@ -17,7 +20,10 @@ export class TripsComponent implements OnInit {
   trips: Trip[] = [];
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private tripService: TripService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +32,23 @@ export class TripsComponent implements OnInit {
         this.trips = response['trips'];
       },
       error: () => {}
+    });
+  }
+
+  deleteTrip(trip: Trip): void {
+    this.dialogService.open(ConfirmDialogComponent, {
+      title: "Please Confirm",
+      body: `Delete ${trip.name}?`
+    }).subscribe({
+      next: response => {
+        if (response) {
+          this.tripService.deleteTrip(trip.id).subscribe({
+            next: wasDeleted => {
+              this.trips = wasDeleted ? this.trips.filter(t => t.id != trip.id) : this.trips;
+            }
+          })
+        }
+      }
     });
   }
 }
