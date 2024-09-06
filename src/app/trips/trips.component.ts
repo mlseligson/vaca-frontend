@@ -21,7 +21,6 @@ export class TripsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private tripService: TripService,
     private dialogService: DialogService
   ) {}

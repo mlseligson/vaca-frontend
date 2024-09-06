@@ -8,14 +8,14 @@
             <input matInput type="text" [formControl]="addTo" [matAutocomplete]="tripAuto" />
             <mat-autocomplete #tripAuto="matAutocomplete">
               @for (trip of tripList; track trip.id) {
-                <mat-option [value]="trip.name">{{trip.name}}</mat-option>
+                <mat-option [value]="trip.id">{{trip.name}}</mat-option>
               }
             </mat-autocomplete>
           </mat-form-field>
 
           <div class="spacer"></div>
 
-          <button mat-icon-button><mat-icon>add</mat-icon></button>
+          <button mat-icon-button (click)="attemptAddActivities()"><mat-icon>add</mat-icon></button>
         }
 
         @default {

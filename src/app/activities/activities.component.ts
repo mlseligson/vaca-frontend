@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatListModule } from '@angular/material/list';
+import { MatListModule, MatSelectionList } from '@angular/material/list';
 import { vacation_activities as activityList } from '../static-data/activity-suggestions.json';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -34,6 +34,7 @@ export class ActivitiesComponent implements OnInit {
   activityList: Array<any>;
   tripList!: Trip[];
   addTo: FormControl;
+  @ViewChild('activities') activities!: MatSelectionList;
 
   constructor(
     private tripService: TripService
@@ -48,5 +49,13 @@ export class ActivitiesComponent implements OnInit {
         this.tripList = trips;
       }
     })
+  }
+
+  attemptAddActivities(): void {
+    const tripId = this.addTo.value
+    const activities = this.activities.selectedOptions.selected.map(o => o.value);
+    this.tripService.addActivitiesBulk(tripId, activities).subscribe({
+      next: (success) => {}
+    });
   }
 }
