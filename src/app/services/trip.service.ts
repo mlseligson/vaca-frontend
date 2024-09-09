@@ -27,10 +27,7 @@ export class TripService {
   ) { }
 
   indexTrips(): Observable<Trip[]> {
-    return this.auth.currentUser$.pipe(
-      map(u => u?.id),
-      switchMap(userId => this.http.get<Trip[]>(`${tripApiUrl}/user/${userId}`))
-    );
+    return this.http.get<Trip[]>(tripApiUrl);
   }
 
   getTrip(id: number | string): Observable<Trip> {
@@ -46,7 +43,7 @@ export class TripService {
   saveTrip(trip: Partial<Trip>): Observable<Trip> {
     return (trip.id) ?
       this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, trip):
-      this.http.post<Trip>(`${tripApiUrl}/user/${trip.user_id}`, trip);
+      this.http.post<Trip>(`${tripApiUrl}`, trip);
   }
 
   deleteTrip(tripId: number): Observable<boolean> {
