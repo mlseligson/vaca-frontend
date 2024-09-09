@@ -32,9 +32,9 @@
 
 <app-loading-progress-bar [detectRouteTransitions]="true"></app-loading-progress-bar>
 
-<mat-sidenav-container hasBackdrop="true" style="height: 100%;">
+<mat-sidenav-container hasBackdrop="true">
   
-  <mat-sidenav #sidenav mode="push"  color="primary">
+  <mat-sidenav #sidenav mode="push" color="primary">
     <mat-nav-list>
       <mat-list-item *ngFor="let link of links" [routerLink]="link.link">
         <mat-icon matListItemIcon fontSet="material-symbols-outlined">{{link.icon}}</mat-icon>
