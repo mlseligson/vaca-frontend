@@ -14,7 +14,8 @@ export const routes: Routes = [{
     path: '',
     component: TripsComponent,
     title: TitleResolverService
-  }]
+  }],
+  runGuardsAndResolvers: 'always'
 }, {
   path: 'trip/:id',
   resolve: { trip: TripEditResolverService },

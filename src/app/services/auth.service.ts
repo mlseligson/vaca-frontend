@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap, throwError } from 'rxjs';
 import { storageKeys } from '../static-data/local-storage-keys.json';
+import { Router } from '@angular/router';
 
 interface BasicCredentials {
   username: string;
@@ -40,7 +41,10 @@ export class AuthService {
   public currentUsername$: Observable<string>;
   public loggedIn$: Observable<boolean>;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {
     const storedToken = localStorage.getItem(tokenKey);
     const payload = decodeJWT(storedToken);
 
@@ -69,13 +73,15 @@ export class AuthService {
           localStorage.setItem(storageKeys["token"], r.token);
 
           return r;
-        })
+        }),
+        tap(() => this.router.navigate(['/']))
       );    
   }
 
   logout() {
     localStorage.removeItem(storageKeys["token"]);
     this.currentUser.next(null);
+    this.router.navigate([], { skipLocationChange: true });
   }
 
   getToken(): string | null {
@@ -85,4 +91,5 @@ export class AuthService {
   verifyExpiry(expiry: number) {
     return expiry > Date.now() / 1000;
   }
+
 }
