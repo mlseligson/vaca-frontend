@@ -53,7 +53,7 @@ export class TripService {
   }
 
   addActivitiesBulk(tripId: number, activities: string[]): Observable<boolean> {
-    return this.http.post(`api/activities/trip/${tripId}`,
+    return this.http.post(`/api/activities/trip/${tripId}`,
       {bulk: true, activities},
       {observe: 'response'}).pipe(
         map(r => r.status == 201)
