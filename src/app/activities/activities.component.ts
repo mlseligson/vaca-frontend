@@ -11,6 +11,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectTrigger } from '@angular/material/select';
 
 @Component({
   selector: 'app-activities',
@@ -25,7 +26,8 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectTrigger
   ],
   templateUrl: './activities.component.html',
   styleUrl: './activities.component.scss'
@@ -52,10 +54,15 @@ export class ActivitiesComponent implements OnInit {
   }
 
   attemptAddActivities(): void {
-    const tripId = this.addTo.value
-    const activities = this.activities.selectedOptions.selected.map(o => o.value);
+    const tripId = this.addTo.value.id;
+    const activities = this.activities.selectedOptions.selected.map(o => o.getLabel());
+
     this.tripService.addActivitiesBulk(tripId, activities).subscribe({
       next: (success) => {}
     });
+  }
+
+  tripNameFn(trip: Trip): string {
+    return (trip && trip.name) ? trip.name : '';
   }
 }
