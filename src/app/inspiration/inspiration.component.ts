@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectTrigger } from '@angular/material/select';
 
 @Component({
-  selector: 'app-activities',
+  selector: 'app-inspiration',
   standalone: true,
   imports: [
     MatCardModule,
@@ -29,10 +29,10 @@ import { MatSelectTrigger } from '@angular/material/select';
     MatInputModule,
     MatSelectTrigger
   ],
-  templateUrl: './activities.component.html',
-  styleUrl: './activities.component.scss'
+  templateUrl: './inspiration.component.html',
+  styleUrl: './inspiration.component.scss'
 })
-export class ActivitiesComponent implements OnInit {
+export class InspirationComponent implements OnInit {
   activityList: Array<any>;
   tripList!: Trip[];
   addTo: FormControl;

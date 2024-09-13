@@ -41,7 +41,7 @@ export class AppComponent {
   title = '';
   links = [
     { text: 'Trips', link: 'trips', icon: 'your_trips' },
-    { text: 'Activities', link: 'activities', icon: 'hiking'},
+    { text: 'Inspiration', link: 'inspiration', icon: 'lightbulb'},
     { text: 'Accommodations', link: 'accommodations', icon: 'flights_and_hotels'}
   ];
   loginProgress = false;

@@ -34,6 +34,11 @@ export class TitleResolverService implements Resolve<string> {
           tap(title => this.nav.setTitle(title))
         );
 
+      case "_InspirationComponent":
+        return of("Inspiration").pipe(
+          tap(title => this.nav.setTitle(title))
+        );
+
       default:
         return "VACA"
     }
