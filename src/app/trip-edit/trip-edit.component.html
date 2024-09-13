@@ -62,7 +62,18 @@
   </form>
 
   <mat-card appearance="raised">
-    <mat-card-content>activities and accommodations here</mat-card-content>
+    <mat-card-content>
+      
+      <nav mat-tab-nav-bar>
+        @for (link of links; track link.link) {
+          <a mat-tab-link [routerLink]="link.link">
+            <mat-icon fontSet="material-symbols-outlined">{{link.icon}}</mat-icon>
+            {{link.text}}
+          </a>
+        }
+      </nav>
+
+    </mat-card-content>
   </mat-card>
 
 </div>

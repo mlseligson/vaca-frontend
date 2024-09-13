@@ -5,6 +5,9 @@ import { TripEditComponent } from './trip-edit/trip-edit.component';
 import { TripEditResolverService } from './resolvers/trip-edit.resolver.service';
 import { TripsResolverService } from './resolvers/trips.resolver.service';
 import { TitleResolverService } from './resolvers/title.resolver.service';
+import { FlightsComponent } from './trip-edit/tabs/flights.component';
+import { PlansComponent } from './trip-edit/tabs/plans.component';
+import { AccomodationsComponent } from './trip-edit/tabs/accomodations.component';
 
 
 export const routes: Routes = [{
@@ -22,7 +25,17 @@ export const routes: Routes = [{
   children: [{
     path: '',
     component: TripEditComponent,
-    title: TitleResolverService
+    title: TitleResolverService,
+    children: [{
+      path: 'flights',
+      component: FlightsComponent
+    }, {
+      path: 'plans',
+      component: PlansComponent
+    }, {
+      path: 'accommodations',
+      component: AccomodationsComponent
+    }]
   }]
 }, {
   path: 'inspiration',

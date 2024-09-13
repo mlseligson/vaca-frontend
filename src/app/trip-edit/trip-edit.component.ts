@@ -10,9 +10,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { JsonPipe } from '@angular/common';
-import { ActivatedRoute, Data, Router } from '@angular/router';
-
-const tripApiUrl = '/api/trips';
+import { ActivatedRoute, Data, Router, RouterModule } from '@angular/router';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-trip-edit',
@@ -26,7 +26,10 @@ const tripApiUrl = '/api/trips';
     MatCardModule,
     MatButtonModule,
     MatDatepickerModule,
-    JsonPipe
+    JsonPipe,
+    MatTabsModule,
+    RouterModule,
+    MatIconModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './trip-edit.component.html',
@@ -34,6 +37,12 @@ const tripApiUrl = '/api/trips';
 })
 export class TripEditComponent implements OnInit {
   @Input({alias: 'id', transform: numberAttribute}) tripId!: number;
+
+  links = [
+    { text: 'Plans', link: 'plans', icon: 'travel_explore'},
+    { text: 'Flights', link: 'flights', icon: 'airplane_ticket' },
+    { text: 'Accommodations', link: 'accommodations', icon: 'flights_and_hotels'}
+  ];
 
   trip: Trip = {
     id: 0,
