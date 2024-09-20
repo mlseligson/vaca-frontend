@@ -14,6 +14,25 @@ export interface Trip {
   end_time: string;
 }
 
+export interface Plan {
+  id: number;
+  name: string;
+  description: string;
+  location: string;
+  image_url: string;
+  start_time: string;
+  end_time: string;
+  trip_id: number;
+}
+
+export interface QueryParams {
+  filter: string;
+  sortBy: string;
+  sortAsc: boolean;
+  pageIndex: number;
+  pageSize: number;
+}
+
 const tripApiUrl = '/api/trips';
 
 @Injectable({
@@ -58,5 +77,11 @@ export class TripService {
       {observe: 'response'}).pipe(
         map(r => r.status == 201)
     );
+  }
+
+  getPlans(tripId: number, queryParams: QueryParams): Observable<Plan[]> {
+    return this.http.get<Plan[]>(`/api/activities/trip/${tripId}`, {
+      params: { ...queryParams }
+    });
   }
 }
