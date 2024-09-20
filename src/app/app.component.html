@@ -34,9 +34,9 @@
 
 <mat-sidenav-container hasBackdrop="true">
   
-  <mat-sidenav #sidenav mode="push" color="primary">
+  <mat-sidenav #sidenav mode="side" color="primary">
     <mat-nav-list>
-      <mat-list-item *ngFor="let link of links" [routerLink]="link.link">
+      <mat-list-item *ngFor="let link of links" [routerLink]="link.link" (click)="sidenav.toggle()">
         <mat-icon matListItemIcon fontSet="material-symbols-outlined">{{link.icon}}</mat-icon>
         <span>{{link.text}}</span>
       </mat-list-item>
@@ -44,8 +44,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="content">
-
     <router-outlet />
-
   </mat-sidenav-content>
+  
 </mat-sidenav-container>
