@@ -35,6 +35,9 @@ export const routes: Routes = [{
     }, {
       path: 'accommodations',
       component: AccomodationsComponent
+    }, {
+      path: '**',
+      redirectTo: 'plans'
     }]
   }]
 }, {
