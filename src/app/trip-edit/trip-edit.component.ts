@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, numberAttribute, OnInit } from '@angular/core';
+import { Component, Input, numberAttribute, OnInit, Type } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -81,6 +81,16 @@ export class TripEditComponent implements OnInit {
         this.tripForm.patchValue(data['trip']);
       }
     })
+  }
+
+  onRouterOutletPopulated(component: Type<any> & {trip: number}) {
+    component.trip = this.tripId;
+
+    // const hasProp = <T extends object>(obj: T, key: string): obj is T & {[key: string]: unknown} => Object.hasOwn(obj, key);
+
+    // if (hasProp(component, 'trip')) {
+    //   component['trip'] = this.tripId;
+    // }
   }
 
   attemptSave() {

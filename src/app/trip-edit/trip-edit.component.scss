@@ -32,9 +32,15 @@ form mat-expansion-panel {
 
     mat-card-content {
       padding: 0;
+
+      .content {
+        padding: 15px;
+      }
     }
   }
 }
+
+
 
 mat-accordion {
   display: block;
