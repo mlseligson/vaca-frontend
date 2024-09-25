@@ -38,11 +38,15 @@ export class PlansComponent {
 }
 
 class PlansDataSource extends VacaDataSource<Plan> {
-  constructor(private tripId: number) {
+  constructor(
+    private _tripService: TripService,
+    private tripId: number) {
     super();
   }
 
-  override loadData(q: QueryParams): void {
-    this._tripService.getPlans(this.tripId, q);
+  loadData(q: QueryParams): void {
+    this._tripService.getPlans(this.tripId, q).subscribe({
+      next: this._data.next
+    });
   }
 }

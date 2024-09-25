@@ -1,17 +1,13 @@
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { BehaviorSubject, Observable } from "rxjs";
-import { QueryParams, TripService } from "../services/trip.service";
-import { inject } from "@angular/core";
+import { QueryParams } from "../services/trip.service";
 
 export abstract class VacaDataSource<T> extends DataSource<T> {
-  private _data: BehaviorSubject<T[]>;
+  protected _data: BehaviorSubject<T[]>;
   private _loading: BehaviorSubject<boolean>;
-  protected _tripService: TripService;
 
-  constructor(
-  ) {
+  constructor() {
     super();
-    this._tripService = inject(TripService);
     this._data = new BehaviorSubject<T[]>([]);
     this._loading = new BehaviorSubject<boolean>(false);
   }
