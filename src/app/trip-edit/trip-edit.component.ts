@@ -83,14 +83,14 @@ export class TripEditComponent implements OnInit {
     })
   }
 
-  onRouterOutletPopulated(component: Type<any> & {trip: number}) {
-    component.trip = this.tripId;
+  onRouterOutletPopulated(component: Type<any>) {
+    // component.tripId = this.tripId;
 
-    // const hasProp = <T extends object>(obj: T, key: string): obj is T & {[key: string]: unknown} => Object.hasOwn(obj, key);
+    const hasProp = <T extends object>(obj: T, key: string): obj is T & {[key: string]: unknown} => Object.hasOwn(obj, key);
 
-    // if (hasProp(component, 'trip')) {
-    //   component['trip'] = this.tripId;
-    // }
+    if (hasProp(component, 'tripId')) {
+      component['tripId'] = this.tripId;
+    }
   }
 
   attemptSave() {

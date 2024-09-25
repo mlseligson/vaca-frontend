@@ -64,7 +64,7 @@
   <mat-card appearance="raised">
     <mat-card-content>
       
-      <nav mat-tab-nav-bar>
+      <nav mat-tab-nav-bar [tabPanel]="tabPanel">
         @for (link of links; track link.link) {
           <a mat-tab-link routerLinkActive [routerLink]="link.link"
              #rla="routerLinkActive" [active]="rla.isActive">
@@ -74,9 +74,11 @@
         }
       </nav>
 
-      <div class="content">
-        <router-outlet ></router-outlet>       
-      </div>
+
+      <mat-tab-nav-panel #tabPanel class="content">
+          <router-outlet (activate)="onRouterOutletPopulated($event)"></router-outlet> 
+      </mat-tab-nav-panel>
+
 
     </mat-card-content>
   </mat-card>
