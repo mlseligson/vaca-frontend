@@ -1,11 +1,11 @@
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { Component, Input, numberAttribute } from '@angular/core';
+import { Component, Input, numberAttribute, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { Plan, QueryParams } from '../../services/trip.service';
+import { Plan, QueryParams, TripService } from '../../services/trip.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { VacaDataSource } from '../../shared/VacaDataSource';
 import { MatInputModule } from '@angular/material/input';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-plans',
@@ -14,10 +14,11 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './plans.component.html',
   styleUrl: './plans.component.scss'
 })
-export class PlansComponent {
-  @Input({transform: numberAttribute, alias: 'trip'}) tripId: number = 0;
+export class PlansComponent implements OnInit {
+  @Input({transform: numberAttribute}) tripId!: number;
+  filterSource$ = new Subject<string>();
 
-  data: DataSource<Plan>;
+  data!: PlansDataSource;
   columns = [
     { name: 'id', display: 'Plan ID' },
     { name: 'name', display: 'Name' },
@@ -27,13 +28,28 @@ export class PlansComponent {
   ];
   displayedColumns = this.columns.map(c => c.name);
 
-  constructor() {
-    this.data = new PlansDataSource(this.tripId);
+  constructor(
+    private _tripService: TripService
+  ) {
+    this.filterSource$.pipe(
+      distinctUntilChanged(),
+      debounceTime(500),
+      takeUntilDestroyed()
+    ).subscribe({
+      next: (filter) => {
+        this.data.loadData({
+          filter,
+          sortBy: 'id',
+          sortAsc: false,
+          pageIndex: 0,
+          pageSize: 10
+        });
+      }
+    });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    // this.data.filter = filterValue.trim().toLowerCase();
+  ngOnInit(): void {
+    this.data = new PlansDataSource(this._tripService, this.tripId);
   }
 }
 
