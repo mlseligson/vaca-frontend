@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "**/*.spec.ts": true
+  },
+  "workbench.settings.useSplitJSON": true,
+  "json.schemas": [
+
+  ]
+}
