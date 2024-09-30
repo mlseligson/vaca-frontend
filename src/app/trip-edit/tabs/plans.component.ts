@@ -15,7 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './plans.component.scss'
 })
 export class PlansComponent implements OnInit {
-  @Input({transform: numberAttribute}) tripId!: number;
+  @Input({ transform: numberAttribute }) tripId!: number;
   filterSource$ = new Subject<string>();
 
   data!: PlansDataSource;
@@ -39,8 +39,8 @@ export class PlansComponent implements OnInit {
       next: (filter) => {
         this.data.loadData({
           filter,
-          sortBy: 'id',
-          sortAsc: false,
+          sort: 'id',
+          order: 'asc',
           pageIndex: 0,
           pageSize: 10
         });

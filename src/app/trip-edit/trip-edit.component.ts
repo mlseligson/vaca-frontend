@@ -36,12 +36,12 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './trip-edit.component.scss'
 })
 export class TripEditComponent implements OnInit {
-  @Input({alias: 'id', transform: numberAttribute}) tripId!: number;
+  @Input({ alias: 'id', transform: numberAttribute }) tripId!: number;
 
   links = [
-    { text: 'Plans', link: 'plans', icon: 'travel_explore'},
+    { text: 'Plans', link: 'plans', icon: 'travel_explore' },
     { text: 'Flights', link: 'flights', icon: 'airplane_ticket' },
-    { text: 'Accommodations', link: 'accommodations', icon: 'flights_and_hotels'}
+    { text: 'Accommodations', link: 'accommodations', icon: 'flights_and_hotels' }
   ];
 
   trip: Trip = {
@@ -86,7 +86,7 @@ export class TripEditComponent implements OnInit {
   onRouterOutletPopulated(component: Type<any>) {
     // component.tripId = this.tripId;
 
-    const hasProp = <T extends object>(obj: T, key: string): obj is T & {[key: string]: unknown} => Object.hasOwn(obj, key);
+    const hasProp = <T extends object>(obj: T, key: string): obj is T & { [key: string]: unknown } => Object.hasOwn(obj, key);
 
     if (hasProp(component, 'tripId')) {
       component['tripId'] = this.tripId;
@@ -101,6 +101,6 @@ export class TripEditComponent implements OnInit {
         else
           this.tripForm.patchValue(trip);
       }
-    });    
+    });
   }
 }
