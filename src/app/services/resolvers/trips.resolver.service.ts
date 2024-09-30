@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, MaybeAsync, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Trip, TripService } from '../services/trip.service';
+import { Trip, VacaApiService } from '../vaca-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,9 @@ import { Trip, TripService } from '../services/trip.service';
 export class TripsResolverService implements Resolve<Trip[]> {
 
   constructor(
-    private trip: TripService
+    private api: VacaApiService
   ) { }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<Trip[]> {
-    return this.trip.indexTrips();
+    return this.api.indexTrips();
   }
 }

@@ -1,6 +1,6 @@
 import { HttpContextToken, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { NavigationService } from './navigation.service';
+import { NavigationService } from '../navigation.service';
 import { delay, finalize } from 'rxjs';
 
 export const SkipLoading = new HttpContextToken<boolean>(() => false);

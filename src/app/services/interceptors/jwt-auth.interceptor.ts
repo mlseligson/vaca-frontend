@@ -1,5 +1,5 @@
 import { HttpHeaders, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
-import { AuthService } from './auth.service';
+import { AuthService } from '../auth.service';
 import { inject } from '@angular/core';
 
 export const jwtAuthInterceptor: HttpInterceptorFn = (req, next) => {

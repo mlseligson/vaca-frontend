@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, MaybeAsync, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../auth.service';
 import { of, map, tap } from 'rxjs';
-import { NavigationService } from '../services/navigation.service';
+import { NavigationService } from '../navigation.service';
 
 @Injectable({
   providedIn: 'root'
