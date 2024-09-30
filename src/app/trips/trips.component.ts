@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TripService, Trip } from '../services/trip.service';
+import { VacaApiService, Trip } from '../services/vaca-api.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,7 +21,7 @@ export class TripsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private tripService: TripService,
+    private api: VacaApiService,
     private dialogService: DialogService
   ) {}
 
@@ -41,7 +41,7 @@ export class TripsComponent implements OnInit {
     }).subscribe({
       next: response => {
         if (response) {
-          this.tripService.deleteTrip(trip.id).subscribe({
+          this.api.deleteTrip(trip.id).subscribe({
             next: wasDeleted => {
               this.trips = wasDeleted ? this.trips.filter(t => t.id != trip.id) : this.trips;
             }

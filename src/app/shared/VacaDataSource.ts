@@ -1,6 +1,6 @@
 import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { BehaviorSubject, Observable } from "rxjs";
-import { QueryParams } from "../services/trip.service";
+import { QueryParams } from "../services/vaca-api.service";
 
 export abstract class VacaDataSource<T> extends DataSource<T> {
   protected _data: BehaviorSubject<T[]>;

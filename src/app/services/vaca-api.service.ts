@@ -27,8 +27,8 @@ export interface Plan {
 
 export interface QueryParams {
   filter: string;
-  sortBy: string;
-  sortAsc: boolean;
+  sort: string;
+  order: string;
   pageIndex: number;
   pageSize: number;
 }
@@ -38,7 +38,7 @@ const tripApiUrl = '/api/trips';
 @Injectable({
   providedIn: 'root'
 })
-export class TripService {
+export class VacaApiService {
 
   constructor(
     private http: HttpClient,
@@ -52,7 +52,7 @@ export class TripService {
   getTrip(id: number | string): Observable<Trip> {
     if (id == "new") {
       return this.auth.currentUser$.pipe(
-        map(u => ({user_id: u?.id}) as Trip)
+        map(u => ({ user_id: u?.id }) as Trip)
       );
     } else {
       return this.http.get<Trip>(`${tripApiUrl}/${id}`);
@@ -61,22 +61,22 @@ export class TripService {
 
   saveTrip(trip: Partial<Trip>): Observable<Trip> {
     return (trip.id) ?
-      this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, trip):
+      this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, trip) :
       this.http.post<Trip>(`${tripApiUrl}`, trip);
   }
 
   deleteTrip(tripId: number): Observable<boolean> {
-    return this.http.delete(`${tripApiUrl}/${tripId}`, {observe: 'response'}).pipe(
+    return this.http.delete(`${tripApiUrl}/${tripId}`, { observe: 'response' }).pipe(
       map(r => r.status == 204)
     )
   }
 
   addActivitiesBulk(tripId: number, activities: string[]): Observable<boolean> {
     return this.http.post(`/api/activities/trip/${tripId}`,
-      {bulk: true, activities},
-      {observe: 'response'}).pipe(
+      { bulk: true, activities },
+      { observe: 'response' }).pipe(
         map(r => r.status == 201)
-    );
+      );
   }
 
   getPlans(tripId: number, queryParams: QueryParams): Observable<Plan[]> {

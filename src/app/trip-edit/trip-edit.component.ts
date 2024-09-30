@@ -3,7 +3,7 @@ import { Component, Input, numberAttribute, OnInit, Type } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Trip, TripService } from '../services/trip.service';
+import { Trip, VacaApiService } from '../services/vaca-api.service';
 import { MatCommonModule, provideNativeDateAdapter } from '@angular/material/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -61,8 +61,8 @@ export class TripEditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private tripService: TripService
-  ) {}
+    private api: VacaApiService
+  ) { }
 
   ngOnInit(): void {
     this.tripForm = this.formBuilder.group({
@@ -94,7 +94,7 @@ export class TripEditComponent implements OnInit {
   }
 
   attemptSave() {
-    this.tripService.saveTrip(this.tripForm.value).subscribe({
+    this.api.saveTrip(this.tripForm.value).subscribe({
       next: (trip: Trip) => {
         if (!this.tripForm.value.id)
           this.router.navigate(['trip', trip.id]);

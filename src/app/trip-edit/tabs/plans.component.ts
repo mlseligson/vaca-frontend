@@ -1,6 +1,6 @@
 import { Component, Input, numberAttribute, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { Plan, QueryParams, TripService } from '../../services/trip.service';
+import { Plan, QueryParams, VacaApiService } from '../../services/vaca-api.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { VacaDataSource } from '../../shared/VacaDataSource';
 import { MatInputModule } from '@angular/material/input';
@@ -29,7 +29,7 @@ export class PlansComponent implements OnInit {
   displayedColumns = this.columns.map(c => c.name);
 
   constructor(
-    private _tripService: TripService
+    private api: VacaApiService
   ) {
     this.filterSource$.pipe(
       distinctUntilChanged(),
@@ -49,19 +49,19 @@ export class PlansComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data = new PlansDataSource(this._tripService, this.tripId);
+    this.data = new PlansDataSource(this.api, this.tripId);
   }
 }
 
 class PlansDataSource extends VacaDataSource<Plan> {
   constructor(
-    private _tripService: TripService,
+    private _api: VacaApiService,
     private tripId: number) {
     super();
   }
 
   loadData(q: QueryParams): void {
-    this._tripService.getPlans(this.tripId, q).subscribe({
+    this._api.getPlans(this.tripId, q).subscribe({
       next: this._data.next
     });
   }

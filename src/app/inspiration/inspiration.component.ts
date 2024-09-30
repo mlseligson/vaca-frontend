@@ -6,7 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Trip, TripService } from '../services/trip.service';
+import { Trip, VacaApiService } from '../services/vaca-api.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -39,14 +39,14 @@ export class InspirationComponent implements OnInit {
   @ViewChild('activities') activities!: MatSelectionList;
 
   constructor(
-    private tripService: TripService
+    private api: VacaApiService
   ) {
     this.addTo = new FormControl('');
     this.activityList = activityList;
   }
 
   ngOnInit(): void {
-    this.tripService.indexTrips().subscribe({
+    this.api.indexTrips().subscribe({
       next: (trips: Trip[]) => {
         this.tripList = trips;
       }
@@ -57,8 +57,8 @@ export class InspirationComponent implements OnInit {
     const tripId = this.addTo.value.id;
     const activities = this.activities.selectedOptions.selected.map(o => o.getLabel());
 
-    this.tripService.addActivitiesBulk(tripId, activities).subscribe({
-      next: (success) => {}
+    this.api.addActivitiesBulk(tripId, activities).subscribe({
+      next: (success) => { }
     });
   }
 
