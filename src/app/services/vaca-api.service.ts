@@ -29,8 +29,8 @@ export interface QueryParams {
   filter: string;
   sort: string;
   order: string;
-  pageIndex: number;
-  pageSize: number;
+  page: number;
+  limit: number;
 }
 
 const tripApiUrl = '/api/trips';

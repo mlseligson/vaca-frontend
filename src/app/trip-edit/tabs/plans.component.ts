@@ -41,8 +41,8 @@ export class PlansComponent implements OnInit {
           filter,
           sort: 'id',
           order: 'asc',
-          pageIndex: 0,
-          pageSize: 10
+          page: 0,
+          limit: 10
         });
       }
     });
@@ -50,6 +50,13 @@ export class PlansComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = new PlansDataSource(this.api, this.tripId);
+    this.data.loadData({
+      filter: '',
+      sort: 'id',
+      order: 'asc',
+      page: 0,
+      limit: 10
+    });
   }
 }
 
@@ -62,7 +69,7 @@ class PlansDataSource extends VacaDataSource<Plan> {
 
   loadData(q: QueryParams): void {
     this._api.getPlans(this.tripId, q).subscribe({
-      next: this._data.next
+      next: (plans) => this._data.next(plans)
     });
   }
 }
