@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, mapTo, of, switchMap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AuthService } from './auth.service';
 
 export interface Trip {
@@ -9,6 +9,7 @@ export interface Trip {
   destination: string;
   cost: number;
   user_id: number;
+  image?: File | null;
   image_url: string;
   start_time: string;
   end_time: string;
@@ -60,9 +61,26 @@ export class VacaApiService {
   }
 
   saveTrip(trip: Partial<Trip>): Observable<Trip> {
-    return (trip.id) ?
-      this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, trip) :
-      this.http.post<Trip>(`${tripApiUrl}`, trip);
+    const form = new FormData();
+
+    for (let [key, field] of Object.entries<string | number | Blob | null>(trip)) {
+      if (!field || key == 'image_url')
+        break;
+
+      if (typeof field == 'number') {
+        field = String(field);
+      }
+      
+      if (field instanceof File) {
+        form.append(key, field, field.name);
+      } else {
+        form.append(key, field);
+      }
+    }
+
+    return trip.id ?
+      this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, form):
+      this.http.post<Trip>(tripApiUrl, form);
   }
 
   deleteTrip(tripId: number): Observable<boolean> {
