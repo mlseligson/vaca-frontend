@@ -17,6 +17,7 @@ form mat-expansion-panel {
   
     mat-form-field {
       display: flex;
+      font-size: .95em;
       
       ::ng-deep div.mat-mdc-text-field-wrapper {
         background-color: #fff;

@@ -26,21 +26,6 @@
     </mat-form-field>
 
     <mat-form-field subscriptSizing="dynamic">
-      <mat-label>Image URL</mat-label>
-      <input matInput type="text" formControlName="image_url" />
-    </mat-form-field>
-
-    <!-- <mat-form-field subscriptSizing="dynamic">
-      <mat-label>Start</mat-label>
-      <input matInput type="datetime" formControlName="start_time" />
-    </mat-form-field>
-
-    <mat-form-field subscriptSizing="dynamic">
-      <mat-label>End</mat-label>
-      <input matInput type="datetime" formControlName="end_time" />
-    </mat-form-field> -->
-
-    <mat-form-field subscriptSizing="dynamic">
       <mat-label>Date Range</mat-label>
       <mat-date-range-input [rangePicker]="picker">
         <input matStartDate formControlName="start_time" placeholder="Start">
@@ -56,6 +41,16 @@
       @if (tripForm.hasError('matEndDateInvalid')) {
         <mat-error>Invalid end date</mat-error>
       }
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic">
+      <mat-label>Image URL</mat-label>
+      <input matInput type="text" class="image-url" formControlName="image_url" readonly="true" />
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic">
+      <mat-label>Upload Image</mat-label>
+      <ngx-mat-file-input #fileInput [accept]="acceptedFileTypes" formControlName="image"></ngx-mat-file-input>
     </mat-form-field>
 
     <button mat-flat-button type="submit">Save</button>
