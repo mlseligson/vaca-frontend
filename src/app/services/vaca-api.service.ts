@@ -64,22 +64,15 @@ export class VacaApiService {
     const form = new FormData();
 
     for (let [key, field] of Object.entries<string | number | Blob | null>(trip)) {
-      if (!field || key == 'image_url')
-        break;
-
-      if (typeof field == 'number') {
-        field = String(field);
-      }
-      
       if (field instanceof File) {
         form.append(key, field, field.name);
       } else {
-        form.append(key, field);
+        form.append(key, String(field));
       }
     }
 
     return trip.id ?
-      this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, form):
+      this.http.patch<Trip>(`${tripApiUrl}/${trip.id}`, form) :
       this.http.post<Trip>(tripApiUrl, form);
   }
 
