@@ -76,7 +76,6 @@ export class TripEditComponent implements OnInit {
       destination: ['', Validators.required],
       cost: [null],
       user_id: [null],
-      image_url: [''],
       image: [null],
       start_time: [''],
       end_time: ['']
@@ -85,6 +84,7 @@ export class TripEditComponent implements OnInit {
     this.route.data.subscribe({
       next: (data: Data) => {
         this.tripForm.patchValue(data['trip']);
+        this.trip.image_url = `api/images/${data['trip']['image_url']}`;
       }
     })
   }
