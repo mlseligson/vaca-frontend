@@ -1,9 +1,33 @@
-.activities-container {
+.inspiration-container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 50vw;
+  width: 80%;
   margin: auto;
+  
+  mat-stepper {
+    border-radius: 1rem;
+
+    form {
+      padding-top: 15px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+
+      mat-form-field {
+        flex-grow: 1;
+      }
+
+      mat-form-field + button {
+        height: auto;
+
+        mat-icon {
+          transform: scale(2);
+          margin: 0;
+        }
+      }
+    }
+  }
 
   mat-card {
     width: 100%;

@@ -1,5 +1,47 @@
-<div class="activities-container">
-  <mat-card appearance="raised">
+<div class="inspiration-container">
+
+  <mat-stepper orientation="vertical" linear="true" #stepper>
+    <mat-step label="Trip" editable="true" errorMessage="You must select a trip!" [stepControl]="tripSelectFormGroup">
+      <form [formGroup]="tripSelectFormGroup">
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>Select trip</mat-label>
+          <input matInput formControlName="trip" [matAutocomplete]="tripAuto" />
+          <mat-autocomplete #tripAuto [displayWith]="tripNameFn">
+            @for (trip of tripList; track trip.id) {
+              <mat-option [value]="trip">{{trip.name}}</mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-button matStepperNext><mat-icon>arrow_circle_down</mat-icon></button>
+      </form>
+    </mat-step>
+
+    <mat-step label="Keywords" optional="true" editable="true" [stepControl]="keywordsFormGroup">
+      <form [formGroup]="keywordsFormGroup">
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>Keywords related to dream activities</mat-label>
+          <mat-chip-grid #keywordsChipGrid aria-label="Enter keywords" formControlName="keywords">
+            @for (keyword of keywords(); track keyword) {
+              <mat-chip-row (removed)="removeKeyword(keyword)">
+                {{keyword}}
+                <button matChipRemove aria-label="'remove reactive form' + keyword">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+          </mat-chip-grid>
+          <input placeholder="New keyword..."
+                [matChipInputFor]="keywordsChipGrid"
+                (matChipInputTokenEnd)="addKeyword($event)"
+        />
+        </mat-form-field>
+
+        <button mat-button matStepperNext><mat-icon>travel_explore</mat-icon></button>
+      </form>
+    </mat-step>
+
+  </mat-stepper>
+  <!-- <mat-card appearance="raised">
     <mat-card-content><mat-card-title>
       @switch (!activities.selectedOptions.isEmpty()) {
         @case (true) {
@@ -41,6 +83,6 @@
         </mat-expansion-panel>
       }
     </mat-accordion>
-  </mat-selection-list>
+  </mat-selection-list> -->
 
 </div>
