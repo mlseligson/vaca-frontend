@@ -44,6 +44,7 @@ export class InspirationComponent implements OnInit {
 
   tripSelectFormGroup: FormGroup;
   keywordsFormGroup: FormGroup;
+  suggestionsFormGroup: FormGroup;
   keywords: WritableSignal<string[]>;
 
   constructor(
@@ -58,6 +59,10 @@ export class InspirationComponent implements OnInit {
     });
 
     this.keywordsFormGroup = formBuilder.group({
+      keywords: this.formBuilder.control('')
+    });
+
+    this.suggestionsFormGroup = formBuilder.group({
       keywords: this.formBuilder.control('')
     });
 

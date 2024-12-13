@@ -34,6 +34,20 @@ export interface QueryParams {
   limit: number;
 }
 
+export interface SuggestedActivities {
+  activities: [
+    category: string,
+    title: string,
+    description: string,
+    location: string,
+    website: string
+  ],
+  activityCount: number,
+  dateRange: string,
+  example: string,
+  location: string
+};
+
 const tripApiUrl = '/api/trips';
 
 @Injectable({
@@ -93,6 +107,12 @@ export class VacaApiService {
   getPlans(tripId: number, queryParams: QueryParams): Observable<Plan[]> {
     return this.http.get<Plan[]>(`/api/activities/trip/${tripId}`, {
       params: { ...queryParams }
+    });
+  }
+
+  getInspiration(location: string, dateRange: string, example: string) {
+    return this.http.get<SuggestedActivities>('/api/activites/suggest', {
+      params: { location, dateRange, example }
     });
   }
 }

@@ -35,7 +35,16 @@
                 (matChipInputTokenEnd)="addKeyword($event)"
         />
         </mat-form-field>
+        <button mat-button matStepperNext><mat-icon>travel_explore</mat-icon></button>
+      </form>
+    </mat-step>
 
+    <mat-step label="Suggestions" optional="true" editable="false" [stepControl]="suggestionsFormGroup">
+      <form [formGroup]="suggestionsFormGroup">
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>Select Activities to Add</mat-label>
+
+        </mat-form-field>
         <button mat-button matStepperNext><mat-icon>travel_explore</mat-icon></button>
       </form>
     </mat-step>
