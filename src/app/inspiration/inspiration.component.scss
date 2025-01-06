@@ -14,11 +14,11 @@
       flex-direction: row;
       align-items: stretch;
 
-      mat-form-field {
+      mat-form-field, mat-selection-list {
         flex-grow: 1;
       }
 
-      mat-form-field + button {
+      & > button:last-child {
         height: auto;
         margin-left: 15px;
 

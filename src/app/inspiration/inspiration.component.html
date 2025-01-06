@@ -1,6 +1,6 @@
 <div class="inspiration-container">
 
-  <mat-stepper orientation="vertical" linear="true" #stepper>
+  <mat-stepper orientation="vertical" linear="true" (selectionChange)="onStepChange($event)" #stepper>
     <mat-step label="Trip" editable="true" errorMessage="You must select a trip!" [stepControl]="tripSelectFormGroup">
       <form [formGroup]="tripSelectFormGroup">
         <mat-form-field subscriptSizing="dynamic">
@@ -41,10 +41,16 @@
 
     <mat-step label="Suggestions" optional="true" editable="false" [stepControl]="suggestionsFormGroup">
       <form [formGroup]="suggestionsFormGroup">
-        <mat-form-field subscriptSizing="dynamic">
-          <mat-label>Select Activities to Add</mat-label>
+        <mat-selection-list #suggestionsSelectList formControlName="suggestions">
+          @for (suggestion of suggestions(); track suggestion) {
+            <mat-list-option>
+              <span matListItemTitle>{{suggestion.title}}</span>
+              <span matListItemLine>{{suggestion.location}}</span>
+              <span matListItemLine>{{suggestion.description}}</span>
+            </mat-list-option>
+          }
+        </mat-selection-list>
 
-        </mat-form-field>
         <button mat-button matStepperNext><mat-icon>travel_explore</mat-icon></button>
       </form>
     </mat-step>
