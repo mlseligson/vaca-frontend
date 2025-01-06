@@ -34,21 +34,24 @@ export interface QueryParams {
   limit: number;
 }
 
-export interface SuggestedActivities {
-  activities: [
-    category: string,
-    title: string,
-    description: string,
-    location: string,
-    website: string
-  ],
+export interface SuggestionResponse {
+  activities: [Suggestion],
   activityCount: number,
   dateRange: string,
   example: string,
   location: string
 };
 
+export interface Suggestion {
+  category: string,
+  title: string,
+  description: string,
+  location: string,
+  website: string
+}
+
 const tripApiUrl = '/api/trips';
+const inspirationApiUrl = '/api/activities/';
 
 @Injectable({
   providedIn: 'root'
@@ -97,7 +100,7 @@ export class VacaApiService {
   }
 
   addActivitiesBulk(tripId: number, activities: string[]): Observable<boolean> {
-    return this.http.post(`/api/activities/trip/${tripId}`,
+    return this.http.post(`${inspirationApiUrl}/trip/${tripId}`,
       { bulk: true, activities },
       { observe: 'response' }).pipe(
         map(r => r.status == 201)
@@ -105,14 +108,14 @@ export class VacaApiService {
   }
 
   getPlans(tripId: number, queryParams: QueryParams): Observable<Plan[]> {
-    return this.http.get<Plan[]>(`/api/activities/trip/${tripId}`, {
+    return this.http.get<Plan[]>(`${inspirationApiUrl}/trip/${tripId}`, {
       params: { ...queryParams }
     });
   }
 
-  getInspiration(location: string, dateRange: string, example: string) {
-    return this.http.get<SuggestedActivities>('/api/activites/suggest', {
-      params: { location, dateRange, example }
+  getInspiration(tripId: number, example: string) {
+    return this.http.get<SuggestionResponse>(`${inspirationApiUrl}/suggest`, {
+      params: { tripId, example }
     });
   }
 }
