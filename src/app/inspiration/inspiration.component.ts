@@ -6,7 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Trip, VacaApiService } from '../services/vaca-api.service';
+import { Suggestion, Trip, VacaApiService } from '../services/vaca-api.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectTrigger } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-inspiration',
@@ -29,7 +30,6 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectTrigger,
     MatStepperModule,
     MatChipsModule
   ],
@@ -37,7 +37,7 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
   styleUrl: './inspiration.component.scss'
 })
 export class InspirationComponent implements OnInit {
-  activityList: Array<any>;
+
   tripList!: Trip[];
   addTo: FormControl;
   @ViewChild('activities') activities!: MatSelectionList;
@@ -46,13 +46,13 @@ export class InspirationComponent implements OnInit {
   keywordsFormGroup: FormGroup;
   suggestionsFormGroup: FormGroup;
   keywords: WritableSignal<string[]>;
+  suggestions: WritableSignal<Suggestion[]>;
 
   constructor(
     private api: VacaApiService,
     private formBuilder: FormBuilder
   ) {
     this.addTo = new FormControl('');
-    this.activityList = activityList;
 
     this.tripSelectFormGroup = formBuilder.group({
       trip: this.formBuilder.control('', Validators.required)
@@ -63,10 +63,11 @@ export class InspirationComponent implements OnInit {
     });
 
     this.suggestionsFormGroup = formBuilder.group({
-      keywords: this.formBuilder.control('')
+      suggestions: this.formBuilder.control('')
     });
 
     this.keywords = signal([]);
+    this.suggestions = signal([]);
   }
 
   ngOnInit(): void {
@@ -110,5 +111,15 @@ export class InspirationComponent implements OnInit {
 
   tripNameFn(trip: Trip): string {
     return (trip && trip.name) ? trip.name : '';
+  }
+
+  onStepChange(e: StepperSelectionEvent) {
+    if (e.selectedIndex == 2 && e.previouslySelectedIndex == 1) {
+      const tripId = this.tripSelectFormGroup.value.trip.id;
+      const example = this.keywords().reduce((acc: string, x: string) => `${acc}, ${x}`);
+      this.api.getInspiration(tripId, example).subscribe({
+        next: (suggestions) => this.suggestions.update(s => suggestions.activities)
+      });
+    }
   }
 }
