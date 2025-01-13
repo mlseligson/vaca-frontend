@@ -118,7 +118,7 @@ export class InspirationComponent implements OnInit {
       const tripId = this.tripSelectFormGroup.value.trip.id;
       const example = this.keywords().reduce((acc: string, x: string) => `${acc}, ${x}`);
       this.api.getInspiration(tripId, example).subscribe({
-        next: (suggestions) => this.suggestions.update(s => suggestions.activities)
+        next: (result) => this.suggestions.update(s => result.suggestions)
       });
     }
   }

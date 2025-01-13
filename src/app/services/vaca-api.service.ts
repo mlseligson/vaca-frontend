@@ -35,10 +35,10 @@ export interface QueryParams {
 }
 
 export interface SuggestionResponse {
-  activities: [Suggestion],
-  activityCount: number,
+  suggestions: [Suggestion],
+  suggestionCount: number,
   dateRange: string,
-  example: string,
+  keywords: [string],
   location: string
 };
 
@@ -47,7 +47,8 @@ export interface Suggestion {
   title: string,
   description: string,
   location: string,
-  website: string
+  url: string,
+  icon: string
 }
 
 const tripApiUrl = '/api/trips';
