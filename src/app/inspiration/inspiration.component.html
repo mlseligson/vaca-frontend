@@ -43,10 +43,13 @@
       <form [formGroup]="suggestionsFormGroup">
         <mat-selection-list #suggestionsSelectList formControlName="suggestions">
           @for (suggestion of suggestions(); track suggestion) {
-            <mat-list-option>
+            <mat-list-option lines="5">
+              <mat-icon matListItemIcon>{{suggestion.icon}}</mat-icon>
               <span matListItemTitle>{{suggestion.title}}</span>
+              <span matListItemLine><b>{{suggestion.category}}</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{suggestion.url}}">{{suggestion.url}}</a></span>
               <span matListItemLine>{{suggestion.location}}</span>
               <span matListItemLine>{{suggestion.description}}</span>
+              
             </mat-list-option>
           }
         </mat-selection-list>

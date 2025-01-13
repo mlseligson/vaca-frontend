@@ -16,6 +16,10 @@
 
       mat-form-field, mat-selection-list {
         flex-grow: 1;
+
+        mat-list-option span {
+          white-space: normal;
+        }
       }
 
       & > button:last-child {
