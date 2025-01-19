@@ -2,10 +2,10 @@
 
   <mat-stepper orientation="vertical" linear="true" (selectionChange)="onStepChange($event)" #stepper>
     <mat-step label="Trip" editable="true" errorMessage="You must select a trip!" [stepControl]="tripSelectFormGroup">
-      <form [formGroup]="tripSelectFormGroup">
+      <form [formGroup]="tripSelectFormGroup" class="rowLayout">
         <mat-form-field subscriptSizing="dynamic">
           <mat-label>Select trip</mat-label>
-          <input matInput formControlName="trip" [matAutocomplete]="tripAuto" />
+          <input matInput #tripSelect formControlName="trip" [matAutocomplete]="tripAuto" />
           <mat-autocomplete #tripAuto [displayWith]="tripNameFn">
             @for (trip of tripList; track trip.id) {
               <mat-option [value]="trip">{{trip.name}}</mat-option>
@@ -17,7 +17,7 @@
     </mat-step>
 
     <mat-step label="Keywords" optional="true" editable="true" [stepControl]="keywordsFormGroup">
-      <form [formGroup]="keywordsFormGroup">
+      <form [formGroup]="keywordsFormGroup" class="rowLayout">
         <mat-form-field subscriptSizing="dynamic">
           <mat-label>Keywords related to dream activities</mat-label>
           <mat-chip-grid #keywordsChipGrid aria-label="Enter keywords" formControlName="keywords">
@@ -40,7 +40,7 @@
     </mat-step>
 
     <mat-step label="Suggestions" optional="true" editable="false" [stepControl]="suggestionsFormGroup">
-      <form [formGroup]="suggestionsFormGroup">
+      <form [formGroup]="suggestionsFormGroup" class="columnLayout">
         <mat-selection-list #suggestionsSelectList formControlName="suggestions">
           @for (suggestion of suggestions(); track suggestion) {
             <mat-list-option lines="5">
@@ -49,12 +49,17 @@
               <span matListItemLine><b>{{suggestion.category}}</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{suggestion.url}}">{{suggestion.url}}</a></span>
               <span matListItemLine>{{suggestion.location}}</span>
               <span matListItemLine>{{suggestion.description}}</span>
-              
             </mat-list-option>
           }
         </mat-selection-list>
 
-        <button mat-button matStepperNext><mat-icon>travel_explore</mat-icon></button>
+        <button class="addButton" mat-button matStepperNext>
+          Add to {{tripSelect.value}}
+          <mat-icon>
+            {{suggestionsSelectList.selectedOptions.isMultipleSelection() ?
+            "library_add" : "add_box"}}
+          </mat-icon>
+        </button>
       </form>
     </mat-step>
 

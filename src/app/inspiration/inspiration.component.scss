@@ -8,27 +8,55 @@
   mat-stepper {
     border-radius: 1rem;
 
-    form {
-      padding-top: 15px;
+    form.rowLayout {
       display: flex;
       flex-direction: row;
       align-items: stretch;
+      justify-content: space-between;
+    }
+
+    form.columnLayout {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form {
+      padding-top: 15px;
 
       mat-form-field, mat-selection-list {
         flex-grow: 1;
 
-        mat-list-option span {
-          white-space: normal;
+        mat-list-option {
+          margin: 15px 0;
+          padding: 5px 0;
+          border-left: 2px dashed #bb8d01;
+
+          a {
+            color: #bb8d01
+          }
+
+          span {
+            white-space: normal;
+          }
         }
       }
 
-      & > button:last-child {
+      & > button:last-child:not(.addButton) {
+        margin-left: 10px;
         height: auto;
-        margin-left: 15px;
+        mat-icon {
+          transform: scale(2);
+          margin: auto;
+        }
+      }
+
+      & > button.addButton {
+        margin: 0 auto;
+        padding: 2rem;
 
         mat-icon {
           transform: scale(2);
-          margin: 0;
+          margin-right: 10px;
         }
       }
     }
