@@ -1,0 +1,17 @@
+.masonry-by-row {
+  div {
+    img {
+      height: 20vh;
+    }
+
+    p {
+      color: #fff;
+      visibility: hidden;
+      transition: 300ms ease-in-out all;
+    }
+  }
+
+  div:hover p {
+    visibility: visible;
+  }
+}

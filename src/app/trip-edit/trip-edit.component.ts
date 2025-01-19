@@ -44,8 +44,8 @@ export class TripEditComponent implements OnInit {
   acceptedFileTypes = "image/png, image/jpeg, image/gif";
   links = [
     { text: 'Plans', link: 'plans', icon: 'travel_explore' },
-    { text: 'Flights', link: 'flights', icon: 'airplane_ticket' },
-    { text: 'Accommodations', link: 'accommodations', icon: 'flights_and_hotels' }
+    { text: 'Flights & Hotels', link: 'flights', icon: 'airplane_ticket' },
+    { text: 'Media', link: 'media', icon: 'photo_library' }
   ];
 
   trip: Trip = {

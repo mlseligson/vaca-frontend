@@ -1,0 +1,8 @@
+<ngx-masonry class="masonry-by-row">
+  @for (item of items; track item.title) {
+    <div ngxMasonryItem>
+      <img [src]="item.img.src" [alt]="item.img.alt" />
+      <p>{{item.title}}</p>
+    </div>
+  }
+</ngx-masonry>

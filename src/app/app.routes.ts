@@ -7,7 +7,7 @@ import { TripsResolverService } from './services/resolvers/trips.resolver.servic
 import { TitleResolverService } from './services/resolvers/title.resolver.service';
 import { FlightsComponent } from './trip-edit/tabs/flights.component';
 import { PlansComponent } from './trip-edit/tabs/plans.component';
-import { AccomodationsComponent } from './trip-edit/tabs/accomodations.component';
+import { MediaComponent } from './trip-edit/tabs/media.component';
 
 
 export const routes: Routes = [{
@@ -33,8 +33,8 @@ export const routes: Routes = [{
       path: 'plans',
       component: PlansComponent
     }, {
-      path: 'accommodations',
-      component: AccomodationsComponent
+      path: 'media',
+      component: MediaComponent
     }, {
       path: '**',
       redirectTo: 'plans'
