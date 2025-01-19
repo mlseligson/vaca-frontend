@@ -4,7 +4,7 @@ form mat-expansion-panel {
 }
 
 .trip-edit-container {  
-  height: calc(100% - 40px);
+  height: calc(100vh - 101px);
   display: flex;
   flex-direction: row;
   gap: 15px;
@@ -36,7 +36,7 @@ form mat-expansion-panel {
     display: flex;
     flex-basis: 0px;
     flex-grow: 1;
-
+    background-color: #ffffff;
 
     mat-card-content {
       padding: 0;
