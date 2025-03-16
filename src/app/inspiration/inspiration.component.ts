@@ -1,7 +1,6 @@
-import { Component, OnInit, signal, Signal, ViewChild, WritableSignal } from '@angular/core';
+import { Component, numberAttribute, OnInit, signal, Signal, ViewChild, WritableSignal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatListModule, MatSelectionList } from '@angular/material/list';
-import { vacation_activities as activityList } from '../static-data/activity-suggestions.json';
+import { MatListModule, MatListOption, MatSelectionList } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,7 +10,6 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectTrigger } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
@@ -100,9 +98,11 @@ export class InspirationComponent implements OnInit {
     });
   }
 
-  attemptAddActivities(): void {
-    const tripId = this.addTo.value.id;
-    const activities = this.activities.selectedOptions.selected.map(o => o.getLabel());
+  attemptAddActivities(selection: MatListOption[]): void {
+    const tripId = this.tripSelectFormGroup.controls['trip'].value.id;
+    const selected: [number] = this.suggestionsFormGroup.controls['suggestions'].value;
+    const activities = selected.map(a => this.suggestions()[a])
+    // selectedOptions.selected.map(o => o.getLabel());
 
     this.api.addActivitiesBulk(tripId, activities).subscribe({
       next: (success) => { }
@@ -116,8 +116,12 @@ export class InspirationComponent implements OnInit {
   onStepChange(e: StepperSelectionEvent) {
     if (e.selectedIndex == 2 && e.previouslySelectedIndex == 1) {
       const tripId = this.tripSelectFormGroup.value.trip.id;
-      const example = this.keywords().reduce((acc: string, x: string) => `${acc}, ${x}`);
-      this.api.getInspiration(tripId, example).subscribe({
+      const keywords = this.keywords.length ?
+        this.keywords().reduce((acc: string, x: string) => `${acc}, ${x}`) :
+        "";
+      
+      
+      this.api.getInspiration(tripId, keywords).subscribe({
         next: (result) => this.suggestions.update(s => result.suggestions)
       });
     }

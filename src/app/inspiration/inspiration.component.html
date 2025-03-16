@@ -43,7 +43,7 @@
       <form [formGroup]="suggestionsFormGroup" class="columnLayout">
         <mat-selection-list #suggestionsSelectList formControlName="suggestions">
           @for (suggestion of suggestions(); track suggestion) {
-            <mat-list-option lines="5">
+            <mat-list-option [value]="suggestion.id" lines="5">
               <mat-icon matListItemIcon>{{suggestion.icon}}</mat-icon>
               <span matListItemTitle>{{suggestion.title}}</span>
               <span matListItemLine><b>{{suggestion.category}}</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{suggestion.url}}">{{suggestion.url}}</a></span>
@@ -53,7 +53,7 @@
           }
         </mat-selection-list>
 
-        <button class="addButton" mat-button matStepperNext>
+        <button class="addButton" mat-button (click)="attemptAddActivities(suggestionsSelectList.selectedOptions.selected)">
           Add to {{tripSelect.value}}
           <mat-icon>
             {{suggestionsSelectList.selectedOptions.isMultipleSelection() ?

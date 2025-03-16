@@ -43,6 +43,7 @@ export interface SuggestionResponse {
 };
 
 export interface Suggestion {
+  id: number,
   category: string,
   title: string,
   description: string,
@@ -52,7 +53,7 @@ export interface Suggestion {
 }
 
 const tripApiUrl = '/api/trips';
-const inspirationApiUrl = '/api/activities/';
+const inspirationApiUrl = '/api/activities';
 
 @Injectable({
   providedIn: 'root'
@@ -100,7 +101,7 @@ export class VacaApiService {
     )
   }
 
-  addActivitiesBulk(tripId: number, activities: string[]): Observable<boolean> {
+  addActivitiesBulk(tripId: number, activities: Suggestion[]): Observable<boolean> {
     return this.http.post(`${inspirationApiUrl}/trip/${tripId}`,
       { bulk: true, activities },
       { observe: 'response' }).pipe(
