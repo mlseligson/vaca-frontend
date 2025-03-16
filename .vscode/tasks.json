@@ -10,12 +10,11 @@
         "owner": "typescript",
         "pattern": "$tsc",
         "background": {
-          "activeOnStart": true,
           "beginsPattern": {
-            "regexp": "(.*?)"
+            "regexp": "/\bWatch mode enabled. Watching for file changes...\b/"
           },
           "endsPattern": {
-            "regexp": "bundle generation complete"
+            "regexp": "/$a/"
           }
         }
       }
