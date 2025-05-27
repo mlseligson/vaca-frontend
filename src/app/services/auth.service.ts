@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, tap, throwError } from 'rxjs';
 import { storageKeys } from '../static-data/local-storage-keys.json';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 interface BasicCredentials {
   username: string;
@@ -29,7 +30,7 @@ function isError(response: Error | any): response is Error {
 
 const decodeJWT = (token: string | null) => token ? JSON.parse(atob(token.split('.')[1])) : null;
 
-const loginApiUrl = '/api/auth/login';
+const loginApiUrl = environment.apiUrl + '/api/auth/login';
 const tokenKey = 'vaca-jwt';
 
 @Injectable({
@@ -58,24 +59,24 @@ export class AuthService {
 
     this.loggedIn$ = this.currentUser.pipe(
       map(p => p != null ? this.verifyExpiry(p.exp) : false)
-    );    
+    );
   }
 
   login(credentials: BasicCredentials): Observable<JWTResponse | Error> {
     return this.http.post<JWTResponse | Error>(loginApiUrl, credentials).pipe(
-        map(r => {
-          if (isError(r))
-            throw throwError(() => r);
+      map(r => {
+        if (isError(r))
+          throw throwError(() => r);
 
-          const payload = decodeJWT(r.token);
-          this.currentUser.next(payload);  
+        const payload = decodeJWT(r.token);
+        this.currentUser.next(payload);
 
-          localStorage.setItem(storageKeys["token"], r.token);
+        localStorage.setItem(storageKeys["token"], r.token);
 
-          return r;
-        }),
-        tap(() => this.router.navigate(['/']))
-      );    
+        return r;
+      }),
+      tap(() => this.router.navigate(['/']))
+    );
   }
 
   logout() {

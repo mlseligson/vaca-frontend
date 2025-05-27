@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 export interface Trip {
   id: number;
@@ -52,8 +53,8 @@ export interface Suggestion {
   icon: string
 }
 
-const tripApiUrl = '/api/trips';
-const inspirationApiUrl = '/api/activities';
+const tripApiUrl = environment.apiUrl + '/api/trips';
+const inspirationApiUrl = environment.apiUrl + '/api/activities';
 
 @Injectable({
   providedIn: 'root'
