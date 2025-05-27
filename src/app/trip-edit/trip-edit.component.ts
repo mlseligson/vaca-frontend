@@ -84,7 +84,7 @@ export class TripEditComponent implements OnInit {
     this.route.data.subscribe({
       next: (data: Data) => {
         this.tripForm.patchValue(data['trip']);
-        this.trip.image_url = `api/images/${data['trip']['image_url']}`;
+        this.trip.image_url = `/public/images/${data['trip']['image_url']}`;
       }
     })
   }
