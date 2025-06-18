@@ -2,7 +2,8 @@
 
 @use '@angular/material' as mat;
 
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 $vaca-theme: mat.define-theme((
   color: (
@@ -23,7 +24,8 @@ $vaca-theme: mat.define-theme((
 @include mat.color-variants-backwards-compatibility($vaca-theme);
 
 html {
-  @include mat.core-theme($vaca-theme);
+  @include mat.elevation-classes();
+  @include mat.app-background();
   @include mat.all-component-themes($vaca-theme);
 
   body {
