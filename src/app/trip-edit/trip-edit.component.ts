@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, ComponentRef, ElementRef, Input, numberAttribute, OnInit, Type, ViewChild } from '@angular/core';
+import { Component ElementRef, Input, numberAttribute, OnInit, Type, ViewChild } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,7 +12,6 @@ import { JsonPipe } from '@angular/common';
 import { ActivatedRoute, Data, Router, RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
-import { NgxMatFileInputComponent } from '@ngxmc/file-input';
 
 @Component({
     selector: 'app-trip-edit',
@@ -29,8 +27,7 @@ import { NgxMatFileInputComponent } from '@ngxmc/file-input';
         JsonPipe,
         MatTabsModule,
         RouterModule,
-        MatIconModule,
-        NgxMatFileInputComponent
+        MatIconModule
     ],
     providers: [provideNativeDateAdapter()],
     templateUrl: './trip-edit.component.html',
@@ -38,7 +35,6 @@ import { NgxMatFileInputComponent } from '@ngxmc/file-input';
 })
 export class TripEditComponent implements OnInit {
   @Input({ alias: 'id', transform: numberAttribute }) tripId!: number;
-  @ViewChild('fileInput') fileInput!: ElementRef<NgxMatFileInputComponent>;
 
   acceptedFileTypes = "image/png, image/jpeg, image/gif";
   links = [
