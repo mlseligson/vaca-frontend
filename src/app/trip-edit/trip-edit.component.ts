@@ -1,14 +1,13 @@
-import { Component, ElementRef, Input, numberAttribute, OnInit, Type, ViewChild } from '@angular/core';
+import { Component, Input, numberAttribute, OnInit, Type } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Trip, VacaApiService } from '../services/vaca-api.service';
-import { MatCommonModule, provideNativeDateAdapter } from '@angular/material/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { JsonPipe } from '@angular/common';
 import { ActivatedRoute, Data, Router, RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +15,6 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
     selector: 'app-trip-edit',
     imports: [
-        MatCommonModule,
         MatExpansionModule,
         MatFormFieldModule,
         MatInputModule,
@@ -24,7 +22,6 @@ import { MatIconModule } from '@angular/material/icon';
         MatCardModule,
         MatButtonModule,
         MatDatepickerModule,
-        JsonPipe,
         MatTabsModule,
         RouterModule,
         MatIconModule
