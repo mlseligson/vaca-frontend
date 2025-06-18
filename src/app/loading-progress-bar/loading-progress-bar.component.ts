@@ -6,11 +6,10 @@ import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/route
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-loading-progress-bar',
-  standalone: true,
-  imports: [MatProgressBarModule, CommonModule],
-  templateUrl: './loading-progress-bar.component.html',
-  styleUrl: './loading-progress-bar.component.scss'
+    selector: 'app-loading-progress-bar',
+    imports: [MatProgressBarModule, CommonModule],
+    templateUrl: './loading-progress-bar.component.html',
+    styleUrl: './loading-progress-bar.component.scss'
 })
 export class LoadingProgressBarComponent implements OnInit {
   loading$: Observable<boolean>;

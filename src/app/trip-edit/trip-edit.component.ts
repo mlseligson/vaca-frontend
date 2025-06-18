@@ -16,26 +16,25 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgxMatFileInputComponent } from '@ngxmc/file-input';
 
 @Component({
-  selector: 'app-trip-edit',
-  standalone: true,
-  imports: [
-    MatCommonModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    JsonPipe,
-    MatTabsModule,
-    RouterModule,
-    MatIconModule,
-    NgxMatFileInputComponent
-  ],
-  providers: [provideNativeDateAdapter()],
-  templateUrl: './trip-edit.component.html',
-  styleUrl: './trip-edit.component.scss'
+    selector: 'app-trip-edit',
+    imports: [
+        MatCommonModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        JsonPipe,
+        MatTabsModule,
+        RouterModule,
+        MatIconModule,
+        NgxMatFileInputComponent
+    ],
+    providers: [provideNativeDateAdapter()],
+    templateUrl: './trip-edit.component.html',
+    styleUrl: './trip-edit.component.scss'
 })
 export class TripEditComponent implements OnInit {
   @Input({ alias: 'id', transform: numberAttribute }) tripId!: number;

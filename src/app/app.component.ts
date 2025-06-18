@@ -15,25 +15,24 @@ import { LoadingProgressBarComponent } from "./loading-progress-bar/loading-prog
 import { NavigationService } from './services/navigation.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterLink,
-    NavComponent,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    LoadingProgressBarComponent
-],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        RouterLink,
+        NavComponent,
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        LoadingProgressBarComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;

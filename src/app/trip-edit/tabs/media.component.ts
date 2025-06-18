@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { NgxMasonryModule } from 'ngx-masonry';
 
 @Component({
-  selector: 'app-media',
-  standalone: true,
-  imports: [NgxMasonryModule],
-  templateUrl: './media.component.html',
-  styleUrl: './media.component.scss'
+    selector: 'app-media',
+    imports: [NgxMasonryModule],
+    templateUrl: './media.component.html',
+    styleUrl: './media.component.scss'
 })
 export class MediaComponent {
   items = [

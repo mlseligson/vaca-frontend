@@ -8,11 +8,10 @@ import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-plans',
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule],
-  templateUrl: './plans.component.html',
-  styleUrl: './plans.component.scss'
+    selector: 'app-plans',
+    imports: [MatFormFieldModule, MatInputModule, MatTableModule],
+    templateUrl: './plans.component.html',
+    styleUrl: './plans.component.scss'
 })
 export class PlansComponent implements OnInit {
   @Input({ transform: numberAttribute }) tripId!: number;

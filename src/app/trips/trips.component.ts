@@ -10,11 +10,10 @@ import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.
 import { switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-trips',
-  standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, RouterLink, MatRippleModule],
-  templateUrl: './trips.component.html',
-  styleUrl: './trips.component.scss'
+    selector: 'app-trips',
+    imports: [MatCardModule, MatButtonModule, MatIconModule, RouterLink, MatRippleModule],
+    templateUrl: './trips.component.html',
+    styleUrl: './trips.component.scss'
 })
 export class TripsComponent implements OnInit {
   trips: Trip[] = [];

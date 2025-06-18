@@ -15,24 +15,23 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
-  selector: 'app-inspiration',
-  standalone: true,
-  imports: [
-    MatCardModule,
-    MatListModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatStepperModule,
-    MatChipsModule
-  ],
-  templateUrl: './inspiration.component.html',
-  styleUrl: './inspiration.component.scss'
+    selector: 'app-inspiration',
+    imports: [
+        MatCardModule,
+        MatListModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatStepperModule,
+        MatChipsModule
+    ],
+    templateUrl: './inspiration.component.html',
+    styleUrl: './inspiration.component.scss'
 })
 export class InspirationComponent implements OnInit {
 
