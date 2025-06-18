@@ -1,50 +1,48 @@
 <app-nav [title]="title" (onToggleClick)="sidenav.toggle();">
-  <div *ngIf="auth.loggedIn$ | async; then loggedIn; else loggedOut"></div>
-  <ng-template #loggedIn>
+  @if (auth.loggedIn$ | async) {
     <button mat-stroked-button [matMenuTriggerFor]="navMenu">{{auth.currentUsername$ | async}}</button>
     <mat-menu #navMenu="matMenu">
       <button mat-menu-item>Settings</button>
       <button mat-menu-item (click)="auth.logout()">Log Out</button>
     </mat-menu>
-  </ng-template>
-  <ng-template #loggedOut>
-      <button mat-stroked-button [matMenuTriggerFor]="login">Login</button>
-      <mat-menu #login="matMenu">
-        <form class="login-form" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" (submit)="attemptLogin()">
-          <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input matInput type="text" name="username" [(ngModel)]="credentials.username" />
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput type="password" name="password" [(ngModel)]="credentials.password" />
-          </mat-form-field>
-
-          <button mat-flat-button
-            [class.button-spinner]="loginProgress"
-            [disabled]="loginProgress"><span>Log In</span></button>
+  } @else {
+    <button mat-stroked-button [matMenuTriggerFor]="login">Login</button>
+    <mat-menu #login="matMenu">
+      <form class="login-form" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" (submit)="attemptLogin()">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput type="text" name="username" [(ngModel)]="credentials.username" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" name="password" [(ngModel)]="credentials.password" />
+        </mat-form-field>
+        <button mat-flat-button
+          [class.button-spinner]="loginProgress"
+          [disabled]="loginProgress"><span>Log In</span></button>
         </form>
       </mat-menu>
-  </ng-template>
+    }
 
-</app-nav>
+  </app-nav>
 
-<app-loading-progress-bar [detectRouteTransitions]="true"></app-loading-progress-bar>
+  <app-loading-progress-bar [detectRouteTransitions]="true"></app-loading-progress-bar>
 
-<mat-sidenav-container hasBackdrop="true">
-  
-  <mat-sidenav #sidenav mode="side" color="primary">
-    <mat-nav-list>
-      <mat-list-item *ngFor="let link of links" [routerLink]="link.link" (click)="sidenav.toggle()">
-        <mat-icon matListItemIcon fontSet="material-symbols-outlined">{{link.icon}}</mat-icon>
-        <span>{{link.text}}</span>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
+  <mat-sidenav-container hasBackdrop="true">
 
-  <mat-sidenav-content class="content">
-    <router-outlet />
-  </mat-sidenav-content>
-  
-</mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" color="primary">
+      <mat-nav-list>
+        @for (link of links; track link) {
+          <mat-list-item [routerLink]="link.link" (click)="sidenav.toggle()">
+            <mat-icon matListItemIcon fontSet="material-symbols-outlined">{{link.icon}}</mat-icon>
+            <span>{{link.text}}</span>
+          </mat-list-item>
+        }
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <router-outlet />
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
