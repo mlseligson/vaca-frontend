@@ -1,6 +1,6 @@
-<ngx-masonry class="masonry-by-row">
+<ngx-masonry cdkDropList (cdkDropListDropped)="drop($event)" class="masonry-by-row">
   @for (item of items; track item.title) {
-    <div ngxMasonryItem>
+    <div ngxMasonryItem cdkDrag>
       <img [src]="item.img.src" [alt]="item.img.alt" />
       <p>{{item.title}}</p>
     </div>
