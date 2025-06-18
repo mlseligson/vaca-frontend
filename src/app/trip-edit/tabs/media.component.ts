@@ -13,13 +13,13 @@ export class MediaComponent {
     {
       title: "Look at this photograph..",
       img: {
-        src: "/api/images/13.png",
+        src: "/public/images/13.png",
         alt: "Every time it makes me laugh.."
       }
     }, {
       title: "Fun in the sun",
       img: {
-        src: "/api/images/15.png",
+        src: "/public/images/15.png",
         alt: "that looks fun"
       }
     }
